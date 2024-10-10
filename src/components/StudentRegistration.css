@@ -1,0 +1,226 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    /* overflow: hidden; */
+    /* height: 100vh; */
+}
+
+body::-webkit-scrollbar {
+    width: 0px;
+}
+
+.container {
+    max-width: 900px !important;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container h2 {
+    color: #1c1b1b;
+    text-align: center;
+}
+.form{
+    width:100% !important;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.form-group label {
+    color: #242323;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.form-column label {
+    color: #242323;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="date"],
+.form-group select {
+    width: 300px;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    flex-basis: calc(50% - 5px);
+}
+
+.form-group textarea {
+    width: calc(100% - 22px);
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    resize: vertical;
+}
+
+.form-group input[type="reset"],
+#GENDER input[type="radio"] + label,
+.xyz button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-right: 10px; /* Add some spacing between the buttons */
+}
+
+.xyz {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+#GENDER label {
+    margin-right: 15px;
+}
+
+#GENDER input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* Adjustments for link appearance and behavior */
+.xyz a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.xyz a:hover, .xyz a:focus {
+    text-decoration: underline;
+}
+
+.container {
+    max-width: 650px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.form-column {
+    flex: 1;  /* Divides space equally */
+    padding: 0 10px;  /* Adds spacing between inputs */
+}
+
+.form-column input[type="text"],
+.form-column input[type="tel"],
+.form-column input[type="email"],
+.form-column input[type="date"]
+ {
+    width: 100%;  /* Makes input take up all available horizontal space in .form-column */
+    padding: 8px;
+}
+
+/* Styles for other form inputs and buttons */
+.custom-dropdown {
+    position: relative;
+    width: 100%;
+    
+margin: 0px;
+}
+
+.custom-dropdown-selected {
+    border: 1px solid #ccc;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.selected-course {
+    display: flex;
+    align-items: center;
+    margin: 2px;
+    padding: 2px 5px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.remove-course {
+    margin-left: 5px;
+    cursor: pointer;
+    color: red;
+}
+
+.custom-dropdown-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.custom-dropdown-option {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.custom-dropdown-option:hover {
+    background-color: #f0f0f0;
+}
+/* StudentRegistration.css */
+
+
+  
+  .form-group-row {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .form-column {
+    flex: 1;
+    margin: 0 10px;
+  }
+  
+  /* Media query for screens below 600px */
+  @media (max-width: 650px) {
+    .form-group-row {
+      flex-direction: column;
+    }
+  
+    .form-column {
+      margin: 10px 0;
+    }
+  }
+  
+  .error-message {
+    color: red;
+  }
+  
+  .preview-image {
+    width: 100px;
+    height: auto;
+    margin-top: 10px;
+  }
+  

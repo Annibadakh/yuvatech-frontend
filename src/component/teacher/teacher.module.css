@@ -1,0 +1,85 @@
+.teacher {
+    background-color: var(--secondary);
+  }
+  
+  .box-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap: 2rem;
+  }
+  
+  .box {
+    background: var(--white);
+    box-shadow: var(--box-shadow);
+    border-radius: .5rem;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    cursor:pointer;
+  }
+  
+  .image {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .image img {
+    background: var(--secondary);
+    width: 100%;
+    height: auto;
+  }
+  
+  .box:hover .image .share {
+    bottom: 0;
+  }
+  
+  .share {
+    position: absolute;
+    bottom: -10rem; 
+    left: 0; right: 0;
+    padding: 1rem;
+  }
+  
+  .share p {
+    height: 5rem;
+    width: 100%;
+    line-height: 2.5rem;
+    font-size: 1.8rem;
+    color: black;
+    background: var(--white);
+    border-radius: .5rem;
+  }
+  
+  .share a:hover {
+    color: var(--primary-color);
+    background: var(--secondary);
+  }
+  .heading{
+    position:relative;
+    color: #3C91E6;
+    font-size: 3rem;
+    text-decoration:underline 1px;
+    text-underline-offset: 5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .4rem;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .content {
+    padding: 2rem;
+    padding-top: 1rem;
+    align-items: center;
+  }
+  
+  .content h3 {
+    font-size: 1.7rem;
+    color: var(--black);
+  }
+  
+  .content span {
+    font-size: 1.5rem;
+    line-height: 2;
+    color: #777;
+  }
+  

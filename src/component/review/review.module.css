@@ -1,0 +1,105 @@
+/* review.module.css */
+
+.review {
+    background-color: var(--secondary);
+  }
+  
+  .slide {
+    padding: 1.5rem;
+    box-shadow: var(--box-shadow);
+    border: 0.1rem solid rgba(0, 0, 0, 0.1);
+    border-radius: 2rem;
+    position: relative;
+    background-color: var(--white);
+  }
+  .heading{
+    position:relative;
+    color: #3C91E6;
+    font-size: 3rem;
+    text-decoration:underline 1px;
+    text-underline-offset: 5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .4rem;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .slide p {
+    font-size: 1.5rem;
+    text-align: center;
+    padding-bottom: 0.5rem;
+    line-height: 1.8;
+    color: #444;
+  }
+  
+  .slide .wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 0.3rem;
+  }
+  
+  .slide .wrapper .separator {
+    width: 0.8rem;
+    height: 0.8rem;
+    border: 0.1rem solid var(--primary-color);
+    transform: rotate(45deg);
+    animation: rotate360 15s linear infinite;
+  }
+  
+  @keyframes rotate360 {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(1turn);
+    }
+  }
+  .heading{
+    position:relative;
+    color: #3C91E6;
+    font-size: 3rem;
+    text-decoration:underline 1px;
+    text-underline-offset: 5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .4rem;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .slide .fa-quote-right {
+    position: absolute;
+    bottom: 3rem;
+    right: 3rem;
+    font-size: 6rem;
+    color: var(--secondary);
+  }
+  
+  .slide .user {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 1.5rem;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+  }
+  
+  .slide .user img {
+    height: 15rem;
+    width: 15rem;
+    border-radius: 15%;
+    object-fit: cover;
+    border: 0.1rem solid var(--primary-color);
+    padding: 0.5rem;
+  }
+  
+  .slide .user h3 {
+    font-size: 1.5rem;
+    color: var(--black);
+    padding-bottom: 0.5rem;
+  }
+  
+  .slide .user .stars i {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+  }
+  

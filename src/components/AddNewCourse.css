@@ -1,0 +1,62 @@
+.add-course-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+}
+.button-left {
+    display: flex;
+    justify-content: flex-start; /* This will align the button to the right */
+     /* Ensure the container takes full width to allow proper alignment */
+}
+
+input[type="text"],
+
+select,
+textarea#description { /* Note the removal of the space between textarea and #description */
+    padding: 10px;
+    margin-top: 5px;
+    width: 100%;
+}
+.form-grid .full-width {
+    grid-column: 1 / -1; /* This makes it span all columns in a grid */
+}
+
+
+input[type="file"] {
+    padding: 5px;
+    margin-top: 5px;
+}
+input[type="number"]{
+    width:"300px";
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    flex-basis: calc(50% - 5px);
+}
+button {
+    padding: 10px 20px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #004494;
+}

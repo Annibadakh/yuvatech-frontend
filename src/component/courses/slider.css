@@ -1,0 +1,14 @@
+.slick-next, .slick-prev{
+    background-color: var(--primary-color) !important;
+    height: 40px !important;
+    width: 40px !important;
+    border-radius: 10% !important; 
+    padding: 10px !important; 
+    color: white !important;
+  }
+  .slick-next{
+    right: -40px !important;
+  }
+  .slick-prev{
+    left: -40px !important;
+  }
