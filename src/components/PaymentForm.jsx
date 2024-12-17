@@ -6120,13 +6120,40 @@ function PaymentForm() {
     paymentMode: '',
     notes: '',
     paymentId: paymentIdFromParams || '',
+    duedate: '',
 
+  });
+  const [amountdata, setAmountData] = useState({
+    totalamount: 0,
+    expenses: 0,
+    balance: 0
   });
   const [errors, setErrors] = useState({});
   const [receipt, setReceipt] = useState(null);
   const [email, setEmail] = useState('');
   const [enrollments, setEnrollments] = useState([]);
   const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
+  useEffect(() => {
+    fetchAmountData();
+  }, []);
+
+  const fetchAmountData = () => {
+    axios.get(`${apiUrl}/amount/list`)
+      .then(res => {
+        if (res.status !== 200) {
+          throw new Error('Failed to fetch amount data');
+        }
+        return res.data; // Assuming the response data contains the amount data
+      })
+      .then(data => {
+        const fetchedData = data.amountdata[0];
+        console.log('Amount data fetched successfully:', fetchedData);
+        setAmountData(fetchedData);
+      })
+      .catch(err => console.error('Error fetching amount data:', err));
+  };
+
 
   useEffect(() => {
     const fetchEnrollments = async () => {
@@ -6309,6 +6336,14 @@ function PaymentForm() {
     }
   
     try {
+      const newTotalAmount = parseInt(paymentData.paymentAmount);
+      const updatedInitialValues = {
+        sendtotalamount: amountdata.totalamount + newTotalAmount,
+        sendexpenses: amountdata.expenses,
+        sendbalance: amountdata.balance + newTotalAmount
+      };
+      await axios.post(`${apiUrl}/amount/initialValues`, updatedInitialValues);
+      
       let newPaymentId = paymentId; // Use existing paymentId if available
 
       if (paymentId) {
@@ -6318,6 +6353,7 @@ function PaymentForm() {
           amount: parseFloat(paymentData.paymentAmount),
           paymentMethod: paymentData.paymentMode,
           notes: paymentData.notes,
+          duedate: paymentData.duedate
         });
 
 
@@ -6330,6 +6366,7 @@ function PaymentForm() {
           amount: parseFloat(paymentData.paymentAmount),
           paymentMethod: paymentData.paymentMode,
           notes: paymentData.notes,
+          duedate: paymentData.duedate,
         });
        
         newPaymentId = response.data.payment.paymentId;
@@ -6519,6 +6556,10 @@ function PaymentForm() {
           <div className={styles.formGroup}>
             <label htmlFor="notes">Notes:</label>
             <textarea id="notes" name="notes" placeholder="Enter any notes here" value={paymentData.notes} onChange={handleChange}></textarea>
+          </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="due">Due Date:</label>
+            <input id='due' className='due' name='duedate' value={paymentData.duedate} onChange={handleChange} type="date"/>
           </div>
           <div className={styles.formActions}>
             <button type="reset">Reset</button>

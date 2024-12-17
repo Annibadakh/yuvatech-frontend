@@ -26,6 +26,7 @@ function UpdateTransactionForm() {
     paymentMode: '',
     notes: '',
     paymentId: paymentId || '',
+    duedate: '',
   });
 
   const [errors, setErrors] = useState({});
@@ -58,6 +59,8 @@ function UpdateTransactionForm() {
       const response = await axios.get(`${apiUrl}/payments/${id}`);
       const payment = response.data;
 
+      console.log("payment response", payment);
+
       setPaymentData({
         enrollmentId: payment.enrollmentId || '',
         studentName: payment.studentName || '',
@@ -69,12 +72,14 @@ function UpdateTransactionForm() {
         paymentMode: payment.paymentMethod || '',
         notes: payment.notes || '',
         paymentId: paymentId || '',
+        duedate: payment.duedate,
       });
     } catch (error) {
       console.error('Failed to fetch payment by ID:', error); // Detailed error log
       Swal.fire('Error', 'Failed to fetch payment by ID.', 'error');
     }
   };
+  console.log('pyment duedate', paymentData.duedate);
 
   const handleChange = (e) => {
     const { name, value } = e.target || e; // Adjust to handle Select's onChange format
@@ -231,6 +236,7 @@ function UpdateTransactionForm() {
           notes: paymentData.notes,
           previousPaymentAmount: parseFloat(previousPaymentAmount),
           newBalanceAmount: parseFloat(paymentData.newBalanceLeft),
+          duedate: paymentData.duedate,
         });
   
         Swal.fire('Success', 'Payment updated successfully!', 'success');
@@ -389,14 +395,12 @@ function UpdateTransactionForm() {
           </div>
           <div className={styles.formGroup}>
             <label htmlFor="notes">Notes</label>
-            <textarea
-              id="notes"
-              name="notes"
-value={paymentData.notes}
-onChange={handleChange}
-rows={4}
-/>
-</div>
+            <textarea id="notes" name="notes" value={paymentData.notes} onChange={handleChange} rows={4} />
+          </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="due">Due Date:</label>
+            <input id='due' className='due' name='duedate' value={paymentData.duedate} onChange={handleChange} type="date"/>
+          </div>
 
 <div className={styles.formGroup}>
 <button type="submit">Update Payment</button>

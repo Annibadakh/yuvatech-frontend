@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 import Layout from "./Layout";
-// import CourseList from "../components/CourseList";
-import BudgetApp from "../components/ExpenseTracker";
+import BlogInput from "../components/BlogInput";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getMe } from "../features/authSlice";
 import Sidebar from "../components/Sidebar";
-// import MyEnrollments from "../components/ViewMyEnrollments";
-const BudgetPage = () => {
+import Profile from "../components/Profile";
+const BlogInputPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isError } = useSelector((state) => state.auth);
@@ -25,10 +24,10 @@ const BudgetPage = () => {
     <div>
       <Sidebar />
       <Layout>
-        <BudgetApp />
+        <BlogInput />
       </Layout>
     </div>
   );
 };
 
-export default BudgetPage;
+export default BlogInputPage;

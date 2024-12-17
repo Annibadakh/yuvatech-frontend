@@ -314,6 +314,7 @@ function Payment({ studentId, enrollmentId, courseId }) {
     totalFees: '',
     courseName: '',
     address: '',
+    duedate: '',
   });
 
   const [errors, setErrors] = useState({});
@@ -321,6 +322,32 @@ function Payment({ studentId, enrollmentId, courseId }) {
   const [email, setEmail] = useState('');
   const apiUrl = process.env.REACT_APP_API_BASE_URL;
   const [buttonsVisible, setButtonsVisible] = useState(true);
+
+  const [amountdata, setAmountData] = useState({
+    totalamount: 0,
+    expenses: 0,
+    balance: 0
+  });
+
+  useEffect(() => {
+    fetchAmountData();
+  }, []);
+
+  const fetchAmountData = () => {
+    axios.get(`${apiUrl}/amount/list`)
+      .then(res => {
+        if (res.status !== 200) {
+          throw new Error('Failed to fetch amount data');
+        }
+        return res.data; // Assuming the response data contains the amount data
+      })
+      .then(data => {
+        const fetchedData = data.amountdata[0];
+        console.log('Amount data fetched successfully:', fetchedData);
+        setAmountData(fetchedData);
+      })
+      .catch(err => console.error('Error fetching amount data:', err));
+  };
 
   useEffect(() => {
     fetchEnrollments().catch((err) => {
@@ -719,6 +746,7 @@ const validatePaymentAmount = (paymentAmount, balanceAmount, discount) => {
     }
   
     try {
+
       // First, enroll the student
       let newPaymentId ; // Use existing paymentId if available
 
@@ -726,8 +754,10 @@ const validatePaymentAmount = (paymentAmount, balanceAmount, discount) => {
         amount: parseFloat(paymentData.paymentAmount),
         paymentMethod: paymentData.paymentMode,
         notes: paymentData.notes,
+        duedate: paymentData.duedate,
     };
     console.log(`Payment Details ${paymentDetails}`);
+    console.log(paymentDetails);
     
 
       const enrollResponse = await axios.post(`${apiUrl}/enroll`, {
@@ -759,6 +789,14 @@ const validatePaymentAmount = (paymentAmount, balanceAmount, discount) => {
       //   paymentMethod: paymentData.paymentMode,
       //   notes: paymentData.notes,
       // });
+
+      const newTotalAmount = parseInt(paymentData.paymentAmount);
+      const updatedInitialValues = {
+        sendtotalamount: amountdata.totalamount + newTotalAmount,
+        sendexpenses: amountdata.expenses,
+        sendbalance: amountdata.balance + newTotalAmount
+      };
+      await axios.post(`${apiUrl}/amount/initialValues`, updatedInitialValues);
   
       const addressData = await fetchAddress();
       const fullAddress = `${addressData.addressLine1}, ${addressData.addressLine2}, ${addressData.city}, ${addressData.district}, ${addressData.taluka}, ${addressData.state}, ${addressData.country}`;
@@ -774,6 +812,7 @@ const validatePaymentAmount = (paymentAmount, balanceAmount, discount) => {
         applicableFees: paymentData.applicableFees,
         newBalanceLeft: paymentData.newBalanceLeft,
         fullAddress: fullAddress, // Including the address data
+        duedate: paymentData.duedate,
         courses: [
           { name: paymentData.courseName, totalFees: paymentData.applicableFees, amountPaid: paymentData.paymentAmount, pendingFees: '$1000' },
         ]
@@ -782,6 +821,20 @@ const validatePaymentAmount = (paymentAmount, balanceAmount, discount) => {
       setReceipt(receiptData);
   
       Swal.fire('Success', 'Payment submitted successfully!', 'success');
+      setPaymentData({
+        enrollmentId: '',
+        studentName: '',
+        paymentAmount: '',
+        balanceAmount: '',
+        newBalanceLeft: '',
+        paymentMode: '',
+        notes: '',
+        discount: '',
+        totalFees: '',
+        courseName: '',
+        address: '',
+        duedate: '',
+      });
     } catch (error) {
       console.log(`Error in payment ${error}`);
       
@@ -975,6 +1028,10 @@ const validatePaymentAmount = (paymentAmount, balanceAmount, discount) => {
             <label htmlFor="notes">Notes:</label>
             <textarea id="notes" name="notes" placeholder="Enter any notes here" value={paymentData.notes} onChange={handleChange}></textarea>
           </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="due">Due Date:</label>
+            <input id='due' className='due' name='duedate' value={paymentData.duedate} onChange={handleChange} type="date"/>
+          </div>
           <div className={styles.formActions}>
             <button type="reset">Reset</button>
             <button type="submit">Submit</button>
@@ -997,7 +1054,8 @@ const validatePaymentAmount = (paymentAmount, balanceAmount, discount) => {
             date={receipt.date}
             applicableFees={receipt.applicableFees} // Add this line
             balanceAmount={receipt.newBalanceLeft}
-            fullAddress={receipt.fullAddress} // Add this line
+            fullAddress={receipt.fullAddress}
+            duedate={receipt.duedate}// Add this line
 
 
             courses={receipt.courses}

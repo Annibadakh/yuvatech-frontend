@@ -6,6 +6,25 @@
   box-sizing: border-box;
   font-family: var(--poppins);
 }
+html{
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-padding-top: 9rem;
+  scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar{
+  width: 10px;
+}
+
+html::-webkit-scrollbar-track{
+  background: black;
+}
+
+html::-webkit-scrollbar-thumb{
+  background: var(--primary-color);
+}
+
 
 a {
   text-decoration: none;

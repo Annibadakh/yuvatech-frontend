@@ -2335,6 +2335,19 @@ const EnrollmentDetails = () => {
       }
     });
   };
+  const handleDue = (row) => {
+    Swal.fire({
+      title: 'Edit Due Date',
+      text: `Edit Due Date: ${row.original.fee.duedate}`,
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'OK',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate(`/duepayment/${row.original.enrollmentId}`);
+      }
+    });
+  };
 
   const exportToCSV = () => {
     const csvData = filteredData.map(item => ({
@@ -2348,6 +2361,7 @@ const EnrollmentDetails = () => {
       status: item.status,
       enrollmentDate: item.enrollmentDate,
       createdBy:item.createdByName,
+      duedate: item.fee.duedate,
       studentMobile:item.student.mobile,
       studentemail:item.student.email,
       studentaddress:item.student.address
@@ -2409,6 +2423,7 @@ const EnrollmentDetails = () => {
       { Header: 'Applicable Fees', accessor: 'fee.applicableFees', Filter: DefaultColumnFilter },
       { Header: 'Balance Amount', accessor: 'fee.balanceAmount', Filter: DefaultColumnFilter },
       { Header: 'Enrollment Date', accessor: 'enrollmentDate', Filter: DateRangeColumnFilter },
+      { Header: 'Due Date', accessor: 'fee.duedate', Filter: DateRangeColumnFilter },
       {
         Header: 'Status',
         accessor: 'status',
@@ -2434,9 +2449,13 @@ const EnrollmentDetails = () => {
             <Button color="primary" onClick={() => handleEdit(row)} style={{ marginRight: '5px' }}>
               <FontAwesomeIcon icon={faEdit} /> Edit
             </Button>
+            <Button color="secondary" onClick={() => handleDue(row)} style={{ marginRight: '5px' }}>
+              <FontAwesomeIcon icon={faEdit} /> Edit Due
+            </Button>
             <Button color="success" onClick={() => handlePayment(row)}>
               <FontAwesomeIcon icon={faMoneyCheckAlt} /> Payment
             </Button>
+            
           </div>
         ),
       },

@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import Layout from "./Layout";
-// import CourseList from "../components/CourseList";
-import BudgetApp from "../components/ExpenseTracker";
+import DueDate from "../components/DueDate";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getMe } from "../features/authSlice";
 import Sidebar from "../components/Sidebar";
-// import MyEnrollments from "../components/ViewMyEnrollments";
 const BudgetPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,7 +23,7 @@ const BudgetPage = () => {
     <div>
       <Sidebar />
       <Layout>
-        <BudgetApp />
+        <DueDate />
       </Layout>
     </div>
   );

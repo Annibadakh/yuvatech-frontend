@@ -170,7 +170,8 @@ const Invoice = ({
   onEmail,
   email,
   setEmail,
-  fullAddress
+  fullAddress,
+  duedate
 }) => {
   useEffect(() => {
     console.log("Invoice data:", {
@@ -183,6 +184,7 @@ const Invoice = ({
       notes,
       date,
       courses,
+      duedate,
     });
   }, [
     enrollmentId,
@@ -194,6 +196,7 @@ const Invoice = ({
     notes,
     date,
     courses,
+    duedate
   ]);
 
 
@@ -420,6 +423,9 @@ const printInvoice = () => {
 
               </ul>
             </div>
+          </div>
+          <div>
+            {duedate}
           </div>
         </div>
         <div

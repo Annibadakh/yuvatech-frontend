@@ -1137,36 +1137,37 @@ const Sidebar = () => {
 
         </SidebarMenuItem>
 
-        <SidebarMenuItem>
-          <NavLink to="#" onClick={() => toggleDropdown('payments')}>
-            <i className='bx bxs-shopping-bag-alt'></i>
-            <span>Payments</span>
-            <i className={`bx ${dropdowns['payments'] ? 'bx-chevron-up' : 'bx-chevron-down'}`}></i>
-          </NavLink>
-          <DropdownMenu isOpen={dropdowns['payments']}>
-  <li>
-    <NavLink 
-      to="/paymentdetails" 
-      onClick={handleNavLinkClick}
-      style={{ background: activeItem === 'viewpayments' ? '#d2a0ff' : '' }}
-    >
-      View Payments
-    </NavLink>
-    {/* {console.log('View payments active:', activeItem === 'viewpayments')} */}
-  </li>
-  <li>
-    <NavLink 
-      to="/payments" 
-      onClick={handleNavLinkClick}
-      style={{ background: activeItem === 'addpayments' ? '#d2a0ff' : 'transparent' }}
-    >
-      Add Payments
-    </NavLink>
-    {/* {console.log('Add Payments active:', activeItem === 'addpayments')} */}
-  </li>
+<SidebarMenuItem>
+  <NavLink to="#" onClick={() => toggleDropdown('payments')}>
+    <i className='bx bxs-shopping-bag-alt'></i>
+    <span>Payments</span>
+    <i className={`bx ${dropdowns['payments'] ? 'bx-chevron-up' : 'bx-chevron-down'}`}></i>
+  </NavLink>
+  <DropdownMenu isOpen={dropdowns['payments']}>
+    <li>
+      <NavLink 
+        to="/paymentdetails" 
+        onClick={handleNavLinkClick}
+        style={{ background: activeItem === 'viewpayments' ? '#d2a0ff' : '' }}
+      >
+        View Payments
+      </NavLink>
+      {/* {console.log('View payments active:', activeItem === 'viewpayments')} */}
+    </li>
+    <li>
+      <NavLink 
+        to="/payments" 
+        onClick={handleNavLinkClick}
+        style={{ background: activeItem === 'addpayments' ? '#d2a0ff' : 'transparent' }}
+      >
+        Add Payments
+      </NavLink>
+      {/* {console.log('Add Payments active:', activeItem === 'addpayments')} */}
+    </li>
+    
 </DropdownMenu>
 
-        </SidebarMenuItem>
+</SidebarMenuItem>
 
 
 
@@ -1271,6 +1272,12 @@ const Sidebar = () => {
       <NavLink to={userRole === 'admin' ? '/budget' : '/budget'} onClick={handleNavLinkClick}>
         <i className='bx bxs-dashboard'></i>
         <span>Budget </span>
+      </NavLink>
+        </SidebarMenuItem>
+        <SidebarMenuItem active={activeItem === 'blogInput'}>
+      <NavLink to={userRole === 'admin' ? '/bloginput' : '/bloginput'} onClick={handleNavLinkClick}>
+        <i className='bx bxs-dashboard'></i>
+        <span>Blog Input </span>
       </NavLink>
         </SidebarMenuItem>
         <SidebarMenuItem active={activeItem === 'contacts'}>

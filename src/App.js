@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet, useNavigation } from "react-router-dom";
 import Dashboard from "./pages/Dashboard.jsx";
 import StudentDashboard from "./pages/StudentDashboard.jsx";
 import HomePage from "./pages/HomePage.jsx"
@@ -37,91 +37,74 @@ import EditStudent from "./pages/EditStudent.jsx";
 import CancelEnrollment from "./pages/Cancelledenrollments.jsx";
 import CompletedEnrollment from "./pages/CompletedEnrollments.jsx";
 import BudgetPage from "./pages/BudgetPage.jsx";
-
-
-// import Twinsdoc from "./components/Twinsdoc.jsx"
-// import MultiStepForm from "./components/MultiStepForm.jsx";
+import DuePayment from "./pages/DuePayment.jsx";
 import Form  from  "./pages/Form.jsx";
+import BlogInputPage from "./pages/BlogInputPage.jsx";
+
+import Loader from './loader/Loader.jsx';
 import { SidebarProvider } from "./features/SidebarContext.js";
-function App() {
+
+const AppLayout = () => {
+  const navigation = useNavigation(); // Get navigation state
+
   return (
-    <div>
-      
-      <BrowserRouter>
-      <SidebarProvider>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<HomePage />} />
-
-          
-
-          {/* <Route path="/signup" element={<LoginForm />} /> */}
-
-
-        {/* Dashboard Routes */}
-
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/contacts" element={<Contact />} />
-          <Route path="/profile" element={<MyProfile />} /> 
-          <Route path="/myprofile" element={<StaffProfile />} />
-          <Route path="/budget" element={<BudgetPage />} />
-
-
-          <Route path="/studentdashboard" element={<StudentDashboard />} />
-          <Route path="/mytransactions" element={<MyTransactions />} />
-
-
-          {/* EnrollmentRoutes */}
-          <Route path="/enroll" element={<Enrollment />} />
-          <Route path="/enroll/:id" element={<Enrollment />} />
-          <Route path="/student/:id" element={<EditStudent />} />
-
-          <Route path="/editenrollment/:enrollmentId" element={<EditEnrollment />} />
-          <Route path="/cancelledenrollments" element={<CancelEnrollment />} />
-          <Route path="/completedenrollments" element={<CompletedEnrollment />} />
-
-
-
-          <Route path="/student" element={<EnrollStudent />} />
-          <Route path="/courses/viewenrollments" element={<ViewEnrollments />} />
-          <Route path="/studentinfo" element={<StudentInfo />} />
-          <Route path="/paymentdetails" element={<PaymentDetails />} />
-          
-          <Route component={Errors } />
-
-
-
-          {/* <Route path="/courses/enroll/uploaddocuments/:studentId" element={<UploadDocuments />} /> */}
-
-          <Route path="/payments" element={<AddPayments />}/>
-          <Route path="/payments/:paymentId" element={<UpdatePayment />}/>
-
-          {/* <Route path="/payments/:enrollmentId" element={<AddPayments />}/> */}
-
-          <Route path="/myEnrollments" element={<MyEnrollments />} />
-
-
-
-          <Route path="/users" element={<Users />} />
-          <Route path="/users/add" element={<AddUser />} />
-          <Route path="/users/edit/:id" element={<EditUser />} />
-          <Route path="/courses" element={<Courses />} /> 
-          <Route path="/courses/add" element={<AddCourse />} /> 
-          <Route path="/courses/edit/:id" element={<EditCourse />} /> 
-          <Route path="/courses/editdocuments/:id" element={<EditCourseDocuments />} />  
-          <Route path="/courses/editdocument/:id" element={<EditDocuments />} />
-          <Route path="/courses/viewcoursedocuments/:id" element={<CourseDocuments />} /> 
-          <Route path="/courses/studymaterial/:id" element={<Studymaterial />} /> 
-
-          <Route path="/register/:studentId" element={<Form />} /> 
-          <Route path="/register" element={<Form />} /> 
-
-
-        </Routes>
-        </SidebarProvider>
-      </BrowserRouter>
-    </div>
+    <SidebarProvider>
+      {navigation.state === "loading" && <Loader />}
+      <Outlet />
+    </SidebarProvider>
   );
+};
+
+const router = createBrowserRouter([
+  {
+    element: <AppLayout />,
+    children: [
+      { path: "/", element: <HomePage /> },
+      { path: "/login", element: <Login /> },
+      { path: "/dashboard", element: <Dashboard /> },
+      { path: "/contacts", element: <Contact /> },
+      { path: "/profile", element: <MyProfile /> },
+      { path: "/myprofile", element: <StaffProfile /> },
+      { path: "/budget", element: <BudgetPage /> },
+      { path: "/duepayment/:enrollmentId", element: <DuePayment /> },
+      { path: "/bloginput", element: <BlogInputPage /> },
+      { path: "/studentdashboard", element: <StudentDashboard /> },
+      { path: "/mytransactions", element: <MyTransactions /> },
+      { path: "/enroll", element: <Enrollment /> },
+      { path: "/enroll/:id", element: <Enrollment /> },
+      { path: "/student/:id", element: <EditStudent /> },
+      { path: "/editenrollment/:enrollmentId", element: <EditEnrollment /> },
+      { path: "/cancelledenrollments", element: <CancelEnrollment /> },
+      { path: "/completedenrollments", element: <CompletedEnrollment /> },
+      { path: "/student", element: <EnrollStudent /> },
+      { path: "/courses/viewenrollments", element: <ViewEnrollments /> },
+      { path: "/studentinfo", element: <StudentInfo /> },
+      { path: "/paymentdetails", element: <PaymentDetails /> },
+      { path: "/payments", element: <AddPayments /> },
+      { path: "/payments/:paymentId", element: <UpdatePayment /> },
+      { path: "/myEnrollments", element: <MyEnrollments /> },
+      { path: "/users", element: <Users /> },
+      { path: "/users/add", element: <AddUser /> },
+      { path: "/users/edit/:id", element: <EditUser /> },
+      { path: "/courses", element: <Courses /> },
+      { path: "/courses/add", element: <AddCourse /> },
+      { path: "/courses/edit/:id", element: <EditCourse /> },
+      { path: "/courses/editdocuments/:id", element: <EditCourseDocuments /> },
+      { path: "/courses/editdocument/:id", element: <EditDocuments /> },
+      { path: "/courses/viewcoursedocuments/:id", element: <CourseDocuments /> },
+      { path: "/courses/studymaterial/:id", element: <Studymaterial /> },
+      { path: "/register/:studentId", element: <Form /> },
+      { path: "/register", element: <Form /> },
+      { path: "*", element: <Errors /> }, // Catch-all route for undefined paths
+    ],
+  },
+]);
+
+
+
+function App() {
+  return <RouterProvider router={router} />;
 }
+
 
 export default App;
