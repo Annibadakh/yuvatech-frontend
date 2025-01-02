@@ -12,6 +12,9 @@ html{
   scroll-padding-top: 9rem;
   scroll-behavior: smooth;
 }
+input.form-control {
+  font-size: 14px;
+}
 
 html::-webkit-scrollbar{
   width: 10px;
