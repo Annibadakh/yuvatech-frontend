@@ -5,7 +5,7 @@ import { store } from './app/store';
 import App from './App';
 // import "bulma/css/bulma.css";
 import axios from "axios";
-// import './index.css';
+import './demo.css';
 // import './App.module.css';
 import './styles/index.module.css'
 

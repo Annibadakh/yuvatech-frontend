@@ -491,7 +491,7 @@ const FormAddUser = () => {
                   
                   {/* } */}
                   <div className="submit-section">
-                    <button type="submit" className="btn btn-primary submit-btn">Save Changes</button>
+                    <button type="submit">Save</button>
                   </div>
                 </form>
               </div>

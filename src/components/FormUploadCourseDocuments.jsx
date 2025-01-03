@@ -87,7 +87,7 @@ const FormUploadCourseDocuments = () => {
                     className="input"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Course Name"
+                    placeholder="Document Name"
                   />
                 </div>
                 <div className="form-group full-width">
@@ -97,7 +97,7 @@ const FormUploadCourseDocuments = () => {
                     type="text"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    placeholder="Course Description"
+                    placeholder="Document Description"
                   />
 
                 </div>

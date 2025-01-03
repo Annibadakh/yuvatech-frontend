@@ -2447,13 +2447,13 @@ const EnrollmentDetails = () => {
         Cell: ({ row }) => (
           <div>
             <Button color="primary" onClick={() => handleEdit(row)} style={{ marginRight: '5px' }}>
-              <FontAwesomeIcon icon={faEdit} /> Edit
+              <FontAwesomeIcon icon={faEdit} />
             </Button>
             <Button color="secondary" onClick={() => handleDue(row)} style={{ marginRight: '5px' }}>
-              <FontAwesomeIcon icon={faEdit} /> Edit Due
+              <FontAwesomeIcon icon={faEdit} /> Due
             </Button>
             <Button color="success" onClick={() => handlePayment(row)}>
-              <FontAwesomeIcon icon={faMoneyCheckAlt} /> Payment
+              <FontAwesomeIcon icon={faMoneyCheckAlt} />
             </Button>
             
           </div>
@@ -2517,7 +2517,7 @@ const EnrollmentDetails = () => {
           <FontAwesomeIcon icon={faFileCsv} /> Export to CSV
         </Button> */}
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'flex-end', gap: '10px' }}>
-  <Button onClick={exportToCSV} style={{ flex: '1 1 200px', minWidth: '150px', marginBottom: '10px' }}>
+  <Button onClick={exportToCSV} style={{ flex: '1 1 200px', minWidth: '150px', height:"45px", marginBottom: '10px' }}>
     <FontAwesomeIcon icon={faFileCsv} /> Export to CSV
   </Button>
   <Input
@@ -2538,7 +2538,7 @@ const EnrollmentDetails = () => {
     onChange={(e) => setEndDate(e.target.value)}
     style={{ flex: '1 1 150px', minWidth: '100px', marginBottom: '10px' }}
   />
-  <Button onClick={() => { setStartDate(''); setEndDate(''); }} style={{ flex: '1 1 150px', minWidth: '100px', marginBottom: '10px' }}>
+  <Button onClick={() => { setStartDate(''); setEndDate(''); }} style={{ flex: '1 1 150px', height:"45px", minWidth: '100px', marginBottom: '10px' }}>
     Clear Date Range
   </Button>
   <Label for="pageSize" style={{ flex: '1 1 100px', minWidth: '100px', marginBottom: '10px' }}>Rows per Page:</Label>
@@ -2547,7 +2547,7 @@ const EnrollmentDetails = () => {
     type="select"
     value={pageSize}
     onChange={(e) => setPageSize(Number(e.target.value))}
-    style={{ flex: '1 1 100px', minWidth: '80px', marginBottom: '10px' }}
+    style={{ flex: '1 1 100px', height:"45px", minWidth: '80px', marginBottom: '10px' }}
   >
     {[10, 20, 30, 50, 100].map((size) => (
       <option key={size} value={size}>

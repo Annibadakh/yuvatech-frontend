@@ -401,7 +401,7 @@ const Sidebar = () => {
     <SidebarSection isSidebarHidden={isSidebarHidden}>
       <SidebarHeader to={userRole === 'student' ? '/studentdashboard' : '/dashboard'}>
         <img src={icon} alt="Icon" />
-        <span>Yuvatech</span>
+        <span>YuvaTech</span>
       </SidebarHeader>
       <SidebarMenu>
         <SidebarMenuItem active={activeItem === 'dashboard'}>

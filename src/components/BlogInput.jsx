@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Button } from 'reactstrap';
 import axios from 'axios';
 import ReactQuill from 'react-quill';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import 'react-quill/dist/quill.snow.css'; // Import the styles
 const BlogInput = () => {
   const [formData, setFormData] = useState({
@@ -259,13 +261,13 @@ const BlogInput = () => {
             )}
           </div>
         </div>
-        <div className="form-actions">
-          <Button type="submit" color="primary">
+        <div className="form-actions" style={{marginLeft:"20px"}}>
+          <button type="submit" style={{marginRight:"10px"}}>
             {selectedBlog ? 'Update' : 'Submit'}
-          </Button>
-          <Button type="button" color="secondary" onClick={handleReset}>
+          </button>
+          <button type="button" onClick={handleReset}>
             Reset
-          </Button>
+          </button>
         </div>
       </form>
       <br />
@@ -301,8 +303,8 @@ const BlogInput = () => {
                 )}
               </td>
               <td>
-                <Button color="info" onClick={() => handleEdit(blog)}>Edit</Button>
-                <Button color="danger" onClick={() => handleDelete(blog.blogId)}>Delete</Button>
+                <Button style={{ marginRight: '5px' }} color="primary" onClick={() => handleEdit(blog)}><FontAwesomeIcon icon={faEdit} /></Button>
+                <Button color="danger" onClick={() => handleDelete(blog.blogId)}><FontAwesomeIcon icon={faTrashAlt} /></Button>
               </td>
             </tr>
           ))}

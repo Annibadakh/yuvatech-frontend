@@ -74,11 +74,12 @@ function Navbar() {
         document.body.classList.toggle('dark', isDarkMode);
     }, [isDarkMode]);
     const titleStyle = {
-        fontFamily: 'Times New Roman, Times, serif'
+        fontFamily: 'Times New Roman, Times, serif',
+        fontSize: "40px"
       };
     return (
-        <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 20px' }}>
-            <i className="bx bx-menu" onClick={toggleSidebar}></i>
+        <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 20px', borderBottom:"1px solid gray" }}>
+            <i className="bx bx-menu" style={{fontSize:"35px"}} onClick={toggleSidebar}></i>
             {/* <a href="#" className="nav-link">Categories</a> */}
            {/* <form action="#" onSubmit={toggleSearch}>
                 <div className="form-input">
@@ -88,7 +89,7 @@ function Navbar() {
                     </button>
                 </div>
             </form> */}
-            <h2 style={titleStyle}> Yuvatech Computers</h2>
+            <h2 style={titleStyle} className='navbar-title'> YuvaTech Computers</h2>
             
             <button className="logout-btn" onClick={handleLogout}>Logout</button>
 

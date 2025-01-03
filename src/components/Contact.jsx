@@ -87,18 +87,17 @@ const Contacts = () => {
   
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-        <Button onClick={exportToCSV}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap:"10px", marginBottom: '10px', flexWrap: 'nowrap'  }}>
+        <Button onClick={exportToCSV} style={{flex: '1 1 200px', minWidth: '150px', height:"45px", marginBottom: '10px'}}>
           <FontAwesomeIcon icon={faFileCsv} /> Export to CSV
         </Button>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
           <Input
             value={globalFilter || ''}
             onChange={(e) => setGlobalFilter(e.target.value)}
             placeholder="Search all columns..."
-            style={{ width: '200px', marginLeft: '10px' }}
+            style={{ flex: '1 1 200px', minWidth: '150px', marginBottom: '10px'  }}
           />
-          <Label for="pageSize" style={{ marginLeft: '10px', marginRight: '5px' }}>
+          <Label for="pageSize" style={{ flex: '1 1 100px', minWidth: '100px', marginBottom: '10px' }}>
             Rows per Page:
           </Label>
           <Input
@@ -106,7 +105,7 @@ const Contacts = () => {
             type="select"
             value={pageSize}
             onChange={(e) => setPageSize(Number(e.target.value))}
-            style={{ width: '80px' }}
+            style={{ flex: '1 1 100px', height:"45px", minWidth: '80px', marginBottom: '10px' }}
           >
             {[10, 20, 30, 50, 100].map((size) => (
               <option key={size} value={size}>
@@ -114,7 +113,7 @@ const Contacts = () => {
               </option>
             ))}
           </Input>
-        </div>
+        
       </div>
       <div style={{ maxHeight: '600px', overflowY: 'auto' }}>
         <table

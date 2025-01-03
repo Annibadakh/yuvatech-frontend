@@ -188,12 +188,14 @@ const CourseDocumentList = () => {
           title: 'No Documents Available',
           text: 'There are no documents available for this course.',
         });
+        navigate("/courses");
       } else {
         Swal.fire({
           icon: 'error',
           title: 'Error fetching materials',
           text: error.response?.data?.message || 'An unexpected error occurred.',
         });
+        navigate("/courses");
       }
     }
     

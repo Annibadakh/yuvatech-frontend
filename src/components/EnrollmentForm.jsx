@@ -3602,7 +3602,7 @@ function EnrollmentForm({ onEnrollmentSubmit,enrollmentId: receivedEnrollmentId,
 
   return (
     <div className="container">
-      <h2>ENROLLMENT FORM</h2>
+      <h2 style={{marginBottom:"10px"}}>ENROLLMENT FORM</h2>
       {message && <p className="error-message">{message}</p>}
       <form onSubmit={handleSubmit}>
         <input type="hidden" id="studentId" name="studentId" value={formData.studentId} />
@@ -3742,7 +3742,7 @@ function EnrollmentForm({ onEnrollmentSubmit,enrollmentId: receivedEnrollmentId,
        
         <div className="form-group">
           {/* <Button type="submit" color="primary">Submit</Button> */}
-          <Button type="button" color="secondary" onClick={handleReset}>Reset</Button>
+          <button style={{marginTop:"10px"}} type="button"onClick={handleReset}>Reset</button>
         </div>
       </form>
       {error && <div className="error-message">{error}</div>}

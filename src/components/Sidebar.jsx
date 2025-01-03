@@ -746,7 +746,7 @@ import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { LogOut, reset } from '../features/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSidebarContext } from '../features/SidebarContext';
-import icon from '../assets/icon.png';
+import icon from '../assets/logo.png';
 import styled from 'styled-components';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -768,17 +768,15 @@ const SidebarSection = styled.section`
 `;
 
 const SidebarHeader = styled(NavLink)`
-  display: flex;
-  align-items: center;
   padding: 20px;
   background: #f9f9f9;
   color: #0f172a;
   text-decoration: none;
 
   img {
-    width: 50px;
-    height: 50px;
-    margin: 20px 15px 15px 18px;
+    width: 200px;
+    height: 60px;
+    margin: 0px 15px 15px 0px;
   }
 
   span {
@@ -980,8 +978,7 @@ const Sidebar = () => {
     <SidebarSection isSidebarHidden={isSidebarHidden}>
 
       <SidebarHeader to={userRole === 'student' ? '/studentdashboard' : '/dashboard'}>
-        <img src={icon} alt="Icon" />
-        <span>Yuvatech</span>
+        <img className='sidebar-icon' src={icon} alt="Icon" />
       </SidebarHeader>
       <div
   style={{
@@ -1274,7 +1271,7 @@ const Sidebar = () => {
         <span>Budget </span>
       </NavLink>
         </SidebarMenuItem>
-        <SidebarMenuItem active={activeItem === 'blogInput'}>
+        <SidebarMenuItem active={activeItem === 'bloginput'}>
       <NavLink to={userRole === 'admin' ? '/bloginput' : '/bloginput'} onClick={handleNavLinkClick}>
         <i className='bx bxs-dashboard'></i>
         <span>Blog Input </span>

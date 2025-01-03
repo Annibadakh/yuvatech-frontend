@@ -467,11 +467,11 @@ const UserList = () => {
           <div>
             <Link to={`/users/edit/${row.original.uuid}`} style={{ marginRight: '5px' }}>
               <Button color="primary">
-                <FontAwesomeIcon icon={faEdit} /> Edit
+                <FontAwesomeIcon icon={faEdit} />
               </Button>
             </Link>
             <Button color="danger" onClick={() => handleDelete(row.original.uuid)}>
-              <FontAwesomeIcon icon={faTrashAlt} /> Delete
+              <FontAwesomeIcon icon={faTrashAlt} />
             </Button>
           </div>
         ),
@@ -526,7 +526,9 @@ const UserList = () => {
           <FontAwesomeIcon icon={faFileCsv} /> Export to CSV
         </Button> */}
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'flex-end', gap: '10px' }}>
-  
+  <Link to="/users/add">
+                <Button color="primary" style={{height:"45px", marginTop:"0px", marginBottom: '10px'}}>Add New User</Button>
+          </Link>
   <Input
     value={globalFilter || ''}
     onChange={(e) => setGlobalFilter(e.target.value)}
@@ -545,7 +547,7 @@ const UserList = () => {
     onChange={(e) => setEndDate(e.target.value)}
     style={{ flex: '1 1 150px', minWidth: '100px', marginBottom: '10px' }}
   />
-  <Button onClick={() => { setStartDate(''); setEndDate(''); }} style={{ flex: '1 1 150px', minWidth: '100px', marginBottom: '10px' }}>
+  <Button onClick={() => { setStartDate(''); setEndDate(''); }} style={{ flex: '1 1 150px', minWidth: '100px', height:"45px", marginBottom: '10px' }}>
     Clear Date Range
   </Button>
   <Label for="pageSize" style={{ flex: '1 1 100px', minWidth: '100px', marginBottom: '10px' }}>Rows per Page:</Label>
@@ -554,7 +556,7 @@ const UserList = () => {
     type="select"
     value={pageSize}
     onChange={(e) => setPageSize(Number(e.target.value))}
-    style={{ flex: '1 1 100px', minWidth: '80px', marginBottom: '10px' }}
+    style={{ flex: '1 1 100px', height:"45px", minWidth: '80px', marginBottom: '10px' }}
   >
     {[10, 20, 30, 50, 100].map((size) => (
       <option key={size} value={size}>
@@ -562,9 +564,7 @@ const UserList = () => {
       </option>
     ))}
   </Input>
-  <Link to="/users/add">
-                     <Button color="primary" style={{marginLeft:"50px"}}>Add New User</Button>
-                </Link>
+  
   {/* Responsive styles */}
   <style jsx>{`
     @media (max-width: 768px) {

@@ -68,7 +68,7 @@ const FormAddCourse = () => {
             <input type="number" id="courseFees" name="courseFees" value={courseData.courseFees} onChange={handleChange} />
           </div>
           <div className="form-row">
-            <label htmlFor="duration">Duration (in Days):</label>
+            <label htmlFor="duration">Duration (in Month):</label>
             <input type="number" id="duration" name="duration" value={courseData.duration} onChange={handleChange} />
           </div>
           <div className="form-row">
@@ -83,7 +83,7 @@ const FormAddCourse = () => {
             <textarea id="description" name="description" rows="4" placeholder="Enter Description" value={courseData.description} onChange={handleChange}></textarea>
           </div>
           <div className="form-group full-width">
-          <button type="submit" style={{color: "blue"}}>Submit</button>
+          <button type="submit" style={{color: "white"}}>Submit</button>
 
           </div>
         </div>

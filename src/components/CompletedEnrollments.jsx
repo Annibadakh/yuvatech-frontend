@@ -167,10 +167,10 @@ const EnrollmentDetails = () => {
         Cell: ({ row }) => (
           <div>
             <Button color="primary" onClick={() => handleEdit(row)} style={{ marginRight: '5px' }}>
-              <FontAwesomeIcon icon={faEdit} /> Edit
+              <FontAwesomeIcon icon={faEdit} />
             </Button>
             <Button color="success" onClick={() => handlePayment(row)}>
-              <FontAwesomeIcon icon={faMoneyCheckAlt} /> Payment
+              <FontAwesomeIcon icon={faMoneyCheckAlt} />
             </Button>
           </div>
         ),
@@ -231,38 +231,38 @@ const EnrollmentDetails = () => {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', flexWrap: 'nowrap' }}>
         
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'flex-end', gap: '10px' }}>
-        <Button onClick={exportToCSV} style={{ marginRight: '10px' }}>
+        <Button onClick={exportToCSV} style={{ flex: '1 1 150px', height: "45px", minWidth: '100px', marginBottom: '10px'}}>
           <FontAwesomeIcon icon={faFileCsv} /> Export to CSV
         </Button>
           <Input
             value={globalFilter || ''}
             onChange={(e) => setGlobalFilter(e.target.value)}
             placeholder="Search all columns..."
-            style={{ width: '200px', marginRight: '10px' }}
+            style={{ flex: '1 1 150px', minWidth: '100px', marginBottom: '10px', marginTop:"0px" }}
           />
           <Input
             type="date"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
-            style={{ marginRight: '10px', maxWidth: '150px' }}
+            style={{ flex: '1 1 150px', minWidth: '100px', marginBottom: '10px', marginTop:"0px"}}
           />
           <Input
             type="date"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
-            style={{ marginRight: '10px', maxWidth: '150px' }}
+            style={{ flex: '1 1 150px', minWidth: '100px', marginBottom: '10px', marginTop:"0px"}}
           />
-          <Button onClick={() => { setStartDate(''); setEndDate(''); }} style={{ marginRight: '10px' }}>
+          <Button onClick={() => { setStartDate(''); setEndDate(''); }} style={{ flex: '1 1 150px', height: "45px", minWidth: '100px', marginBottom: '10px'}}>
             Clear Date Range
           </Button>
 
-          <Label for="pageSize" style={{ marginRight: '5px' }}>Rows per Page:</Label>
+          <Label for="pageSize" style={{ flex: '1 1 100px', minWidth: '100px', marginBottom: '10px'}}>Rows per Page:</Label>
           <Input
             id="pageSize"
             type="select"
             value={pageSize}
             onChange={(e) => setPageSize(Number(e.target.value))}
-            style={{ width: '80px' }}
+            style={{flex: '1 1 100px', minWidth: '80px', height:"45px", marginBottom: '10px'}}
           >
             {[10, 20, 30, 50, 100].map((size) => (
               <option key={size} value={size}>
