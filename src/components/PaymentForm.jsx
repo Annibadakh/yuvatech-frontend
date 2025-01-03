@@ -6393,6 +6393,7 @@ function PaymentForm() {
         address: paymentData.address,
         paymentAmount: paymentData.paymentAmount,
         paymentMode: paymentData.paymentMode,
+        duedate: paymentData.duedate,
         // balanceAmount: paymentData.balanceAmount,
         fullAddress: fullAddress, // Including the address data
         paymentId: newPaymentId, 
@@ -6580,7 +6581,7 @@ function PaymentForm() {
             applicableFees={receipt.applicableFees} // Add this line
             paymentMode={receipt.paymentMode}
             paymentId={receipt.paymentId}
-
+duedate={receipt.duedate}
             notes={receipt.notes}
             date={receipt.date}
             courses={receipt.courses}

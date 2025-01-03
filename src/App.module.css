@@ -97,6 +97,10 @@ html::-webkit-scrollbar-thumb{
   position: relative;
 }
 
+input.form-control {
+  font-size: 15px;
+}
+
 .shine::after{
   content: "";
   position: absolute;
