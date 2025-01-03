@@ -11,7 +11,8 @@ ul {
 }
 .invoice-body-info-item {
   display: flex;
-  justify-content: space-between; /* This will align items at the ends of the container */
+  justify-content: space-between; 
+  border: 1px solid black;/* This will align items at the ends of the container */
 }
 
 .info-item-td {
@@ -107,12 +108,12 @@ body {
 
 .invoice-head-middle,
 .invoice-head-bottom {
-    padding: 16px 0;
+    padding: 5px 0 0 0;
 }
 
 .invoice-body {
     border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
+    /* border-radius: 4px; */
     overflow: hidden;
 }
 
@@ -125,6 +126,7 @@ body {
 .invoice-body table td,
 .invoice-body table th {
     padding: 12px;
+    border: 1px solid black;
 }
 
 .invoice-body table tr {
@@ -146,7 +148,7 @@ body {
 }
 
 .invoice-foot {
-    padding: 30px 0;
+    padding: 10px 0;
 }
 
 .invoice-foot p {
@@ -169,12 +171,13 @@ body {
 }
 
 .invoice-head-top,
-.invoice-head-middle,
-.invoice-head-bottom {
+.invoice-head-middle {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     padding-bottom: 10px;
+    
 }
+
 
 @media screen and (max-width: 992px) {
     .invoice {
@@ -184,14 +187,11 @@ body {
 
 @media screen and (max-width: 576px) {
     .invoice-head-top,
-    .invoice-head-middle,
-    .invoice-head-bottom {
-        grid-template-columns: repeat(1, 1fr);
-    }
+    .invoice-head-middle{
 
-    .invoice-head-bottom-right {
-        margin-top: 12px;
-        margin-bottom: 12px;
+         grid-template-columns: repeat(1, 1fr);
+    
+        
     }
 
     .invoice * {
@@ -241,4 +241,3 @@ body {
         margin: 1cm; /* Adjusts content margin */
     }
 }
-

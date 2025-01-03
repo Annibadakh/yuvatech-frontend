@@ -132,35 +132,32 @@ const printInvoice = () => {
       printWindow.close();
   };
 };
-
-
-
-
-
   return (
     <>
-    <div id="receiptContainer" style={{padding:'30px'}} className={styles.invoice}>
+    <div id="receiptContainer" style={{padding:'10px 30px'}} className={styles.invoice}>
       <div className={styles["invoice-container"]}>
         <div className={styles["invoice-head"]}>
 
-<div
-  className={styles.hr}
-  style={{ borderTop: '1px solid black', margin: '10px 0', width: '100%' }}
-></div>
+        <div
+          className={styles.hr}
+          style={{ borderTop: '1px solid black', margin: '0', width: '100%' }}
+        ></div>
 
 <div
   className={styles["invoice-head-container"]}
   style={{
     display: "flex",
-    justifyContent: "space-between", // Ensures proper alignment of the logo and content
+    justifyContent: "space-between",
+    gap: "10px",
     alignItems: "center", // Vertically aligns both logo and content
     // height: "100vh", // Full viewport height
     padding: "0 20px", // Optional padding for spacing
   }}
 >
   {/* Logo on the left */}
-  <div style={{ width: "200px" }}>
-    <img src={logo} alt="Logo" style={{ width: "100%" }} />
+  <div style={{ width: "150px" }}>
+    <img src={logo} alt="Logo" style={{ width: "100%", marginBottom:"5px" }} />
+    <span style={{ fontWeight: "" }}>Date : {date}</span>
   </div>
 
   {/* Centered Content */}
@@ -176,7 +173,7 @@ const printInvoice = () => {
       style={{
         fontSize: "2em",
         fontWeight: "bold",
-        marginBottom: "10px",
+        marginBottom: "5px",
       }}
     >
       YuvaTech Computers
@@ -187,34 +184,25 @@ const printInvoice = () => {
         marginBottom: "20px",
       }}
     >
-      Kopargaon - 423601, Ahmednagar <br />
-      Mob.No - 9881199931    </div>
-      <span style={{ fontWeight: "" }}>Date : {date}</span>
+      Office No.1, 2nd Floor, Opp. ST Stand,<br /> Anil coldrink, Kopargaon, Ahmednagar.<br />
+      Mob.No: +91 9881199931    </div>
+      
 
   </div>
 
 </div>
 
 
-          <div
+<div
   className={styles.hr}
   style={{ borderTop: '1px solid black', margin: '10px 0', width: '100%' }}
 ></div>
           <div className={styles["invoice-head-bottom"]}>
             <div className={styles["invoice-head-bottom-left"]}>
-              <ul>
-                <li className={styles["text-bold"]}>Invoiced To:</li>
-                <li>{studentName}</li>
-                <li>{address}</li>
-              </ul>
+              
+                <span className={styles["text-bold"]}>Invoiced To:</span>  {studentName} , {address}
+              
             </div>
-            <div className={styles["invoice-head-bottom-right"]}>
-              <ul className={styles["text-end"]}>
-                <li className={styles["text-bold"]}>Due Date : {new Date(duedate).toLocaleDateString("en-GB")} </li>
-
-              </ul>
-            </div>
-            
           </div>
         </div>
         <div
@@ -268,12 +256,13 @@ const printInvoice = () => {
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
+                  flexFlow:"column",
+                  alignItems:"start",
                   width: "100%",
+                  border: "1px solid black"
                 }}
               >
-                <div style={{ fontWeight: "bold", padding: "13px" }}>
+                <div style={{ fontWeight: "bold", padding: "2px" }}>
                   Total Fees :{" "}
                   <span style={{ fontWeight: "normal" }}>{applicableFees} </span>
                 </div>
@@ -281,12 +270,20 @@ const printInvoice = () => {
                   style={{
                     fontWeight: "bold",
                     textAlign: "right",
-                    padding: "13px",
+                    padding: "2px",
                   }}
                 >
                   Pending Fees :{" "}
                   <span style={{ fontWeight: "normal" }}>{balanceAmount}</span>
                 </div>
+                <div style={{
+                    fontWeight: "bold",
+                    textAlign: "right",
+                    padding: "2px",
+                  }}>
+                    Due Date :{" "}
+                    <span style={{ fontWeight: "normal" }}>{new Date(duedate).toLocaleDateString("en-GB")}</span>
+                  </div>
               </div>
             </div>
           </div>

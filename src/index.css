@@ -429,7 +429,7 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(calc(33.33% - 16px), 1fr)); /* Adjusted for three items per row */
   grid-gap: 24px;
-  margin-top: 36px;
+  margin-top: 0px;
 }
 #content main .box-info li {
   padding: 24px;

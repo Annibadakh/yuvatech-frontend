@@ -3472,11 +3472,20 @@ function EnrollmentForm({ onEnrollmentSubmit,enrollmentId: receivedEnrollmentId,
     fetchEnrollmentDetails();
   }, [enrollmentId, apiUrl]);
   
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prevState) => ({
+  //     ...prevState,
+  //     [name]: value,
+  //   }));
+  // };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
       ...prevState,
-      [name]: value,
+      [name]: ["firstName", "middleName", "lastName"].includes(name)
+        ? value.toUpperCase()
+        : value, // Convert to uppercase for specific fields
     }));
   };
 

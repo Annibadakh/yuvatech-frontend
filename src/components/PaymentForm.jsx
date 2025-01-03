@@ -6400,7 +6400,7 @@ function PaymentForm() {
         notes: paymentData.notes,
         balanceAmount: balanceData.currentBalance,
         applicableFees: balanceData.applicableFees,
-        date: new Date().toLocaleString(),
+        date: new Date().toLocaleDateString(),
         courses: [
           { name: paymentData.courseName, totalFees: '$1000', amountPaid: paymentData.paymentAmount, pendingFees: (1000 - parseFloat(paymentData.paymentAmount)).toFixed(2) },
           // Add more courses as needed

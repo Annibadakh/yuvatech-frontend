@@ -3,7 +3,6 @@ import { createBrowserRouter, RouterProvider, Outlet, useNavigation } from "reac
 import Dashboard from "./pages/Dashboard.jsx";
 import StudentDashboard from "./pages/StudentDashboard.jsx";
 import HomePage from "./pages/HomePage.jsx"
-import Login from "./components/Login.jsx";
 import Users from "./pages/Users.jsx";
 import Courses from "./pages/Courses.jsx"; // Changed from "Products" to "Courses"
 import AddUser from "./pages/AddUser.jsx";
@@ -61,7 +60,6 @@ const router = createBrowserRouter([
     element: <AppLayout />,
     children: [
       { path: "/", element: <HomePage /> },
-      { path: "/login", element: <Login /> },
       { path: "/dashboard", element: <Dashboard /> },
       { path: "/contacts", element: <Contact /> },
       { path: "/profile", element: <MyProfile /> },

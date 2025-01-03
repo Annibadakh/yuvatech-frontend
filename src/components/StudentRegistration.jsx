@@ -855,17 +855,34 @@ function StudentRegistrationForm() {
     }, []);
     // const { studentId } = response.data; // Extract studentId from server response
 
+    // const handleChange = (e) => {
+    //     const { name, value, type, checked } = e.target;
+    //     if (type === 'checkbox') {
+    //         setFormData(prevState => ({
+    //             ...prevState,
+    //             [name]: checked,
+    //         }));
+    //     } else {
+    //         setFormData(prevState => ({
+    //             ...prevState,
+    //             [name]: value,
+    //         }));
+    //     }
+    // };
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
+    
         if (type === 'checkbox') {
-            setFormData(prevState => ({
+            setFormData((prevState) => ({
                 ...prevState,
                 [name]: checked,
             }));
         } else {
-            setFormData(prevState => ({
+            setFormData((prevState) => ({
                 ...prevState,
-                [name]: value,
+                [name]: ["firstName", "middleName", "lastName"].includes(name)
+                    ? value.toUpperCase() // Convert to uppercase for specific fields
+                    : value, // Leave other fields unchanged
             }));
         }
     };
