@@ -1,11 +1,14 @@
 
 import React, { useState, useEffect } from 'react';
 import styles from './header.module.css';
- // Import the CSS module
 import logo from './images/logo.png';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LoginUser, reset } from "../../features/authSlice";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+
 const Header = () => {
   const [navbarActive, setNavbarActive] = useState(false);
   const [loginFormActive, setLoginFormActive] = useState(false);
@@ -76,16 +79,16 @@ const Header = () => {
       </nav>
 
       <div className={styles.icons}>
-        <div id="login-btn" onClick={toggleLoginForm} className="fas fa-user"></div>
+        <div id="login-btn" onClick={toggleLoginForm} ><FontAwesomeIcon icon={faUser} style={{fontSize:"25px"}} className={styles['icon']} /></div>
         {/* <div id="menu-btn" className={`fas fa-bars ${navbarActive ? styles.active : ''}`} onClick={toggleNavbar}></div> */}
-        <div id="menu-btn" className={`fas fa-bars ${styles['menubtn']} ${navbarActive ? 'active' : ''}`} onClick={toggleNavbar}></div>
+        <div id="menu-btn" className={`${styles['menubtn']} ${navbarActive ? 'active' : ''}`} onClick={toggleNavbar}><FontAwesomeIcon icon={faBars} style={{fontSize:"25px"}} className={styles['icon']} /></div>
 
       </div>   
 
       <form onSubmit={handleLoginFormSubmit} className={`${styles['login-form']} ${loginFormActive ? styles.active : ''}`}>
         {isError && <p className="has-text-centered">{message}</p>}
         <h2>login form</h2>
-        <div id="close-form" className={`fas fa-times ${styles['close-form']}`} onClick={closeLoginForm}></div> 
+        <div id="close-form"  onClick={closeLoginForm}><FontAwesomeIcon icon={faTimes} style={{fontSize:"25px"}} className={styles['close-form']} /></div> 
         <input type="email" placeholder="enter your email" className={styles.box} value={email} onChange={(e) => setEmail(e.target.value)} />
         <input type="password" placeholder="enter your password" className={styles.box} value={password} onChange={(e) => setPassword(e.target.value)} />
         {/* <div className={styles['log-btn']}> */}

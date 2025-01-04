@@ -21,6 +21,9 @@ import ViewEnrollments from "./pages/ViewEnrollments.jsx"
 import Enrollment from "./pages/Enrollment.jsx"
 // import "bulma/css/bulma.css";
 import './styles/index.module.css';
+import 'font-awesome/css/font-awesome.min.css';
+
+
 import Contact from "./pages/ContactUs.jsx"
 import EditCourseDocuments from "./pages/EditCourseDocuments.jsx";
 import CourseDocuments from "./pages/CourseDocuments.jsx";

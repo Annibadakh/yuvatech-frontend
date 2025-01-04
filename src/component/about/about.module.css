@@ -70,6 +70,7 @@
     color: #444;
     padding: 1rem 0;
     line-height: 1.8;
+    text-align: justify;
   }
 
   @media (max-width:768px){

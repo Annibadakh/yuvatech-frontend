@@ -355,6 +355,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUpload } from '@fortawesome/free-solid-svg-icons';
+
 import { Button } from 'reactstrap';
 import { FaEye } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
@@ -543,7 +546,7 @@ console.log(id);
                       </div>
                       <div className="upload-img">
                         <div className="change-photo-btn">
-                          <span><i className="fa fa-upload"></i> Upload Photo</span>
+                          <div style={{width:"150px"}}><FontAwesomeIcon icon={faUpload} /> Upload Photo</div>
                           <input type="file" className="upload" accept=".png, .jpg, .jpeg" onChange={handleFileChange} />
                         </div>
                         <small className="form-text text-muted">Allowed JPG, PNG and JPEG. Max size of 2MB</small>

@@ -141,6 +141,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { ToastContainer, toast } from 'react-toastify';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUpload } from '@fortawesome/free-solid-svg-icons';
 
 const FormAddUser = () => {
     const [userData, setUserData] = useState({
@@ -260,7 +262,7 @@ const FormAddUser = () => {
                                             </div>
                                             <div className="upload-img">
                                                 <div className="change-photo-btn">
-                                                    <span><i className="fa fa-upload"></i> Upload Photo</span>
+                                                    <div style={{width:"150px"}}><FontAwesomeIcon icon={faUpload} /> Upload Photo</div>
                                                     <input type="file" className="upload" accept=".png, .jpg, .jpeg" onChange={handleFileChange} />
                                                 </div>
                                                 <small className="form-text text-muted">Allowed JPG, PNG and JPEG. Max size of 2MB</small>

@@ -69,12 +69,7 @@ const Footer = () => {
                 <div className={styles.box}>
                      <img src={footlogo} alt="YuvaTech Computers" />
                     <p className={styles.adress}>Best Computer Institute in Kopargaon</p>
-                    <div className={styles.share}>
-                        <a href="#footer" className="fab fa-facebook-f"></a>
-                        <a href="#footer" className="fab fa-twitter"></a>
-                        <a href="https://www.instagram.com/yuvatech_computer_kopargaon?utm_source=qr&igsh=cHg1N2prcHVuZWti" target="_blank" className="fab fa-instagram"></a>
-                        <a href="#footer" className="fab fa-linkedin"></a>
-                    </div>
+                    
                 </div>
                 <div className={styles.box}>
                     <h3>Quick Links</h3>

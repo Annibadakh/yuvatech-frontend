@@ -84,7 +84,8 @@ const Main = () => {
         <main>
             <div className="head-title">
                 <div className="left">
-                    <h1>Dashboard</h1>
+                    <h1>Dashboard
+                    </h1>
                 </div>
             </div>
             <ul className="box-info">

@@ -3,11 +3,12 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 import App from './App';
-// import "bulma/css/bulma.css";
 import axios from "axios";
 import './demo.css';
 // import './App.module.css';
-import './styles/index.module.css'
+import './styles/index.module.css';
+import 'font-awesome/css/font-awesome.min.css';
+
 
 import reportWebVitals from './reportWebVitals';
 

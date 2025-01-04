@@ -186,6 +186,8 @@ import exel from './images/exce.jpg';
 import typing from './images/typing.jpg';
 import styles from './courses.module.css';
 import './slider.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClock } from '@fortawesome/free-regular-svg-icons';
 const inlineStyle = {
   padding: '5rem 7%',
   border: '1px solid var(--primary-color)',
@@ -335,7 +337,7 @@ function App() {
                 <h3>{course.description}</h3>
                 <div className={styles.icons}>
                   {/* <span><i className="far fa-bookmark"></i> {course.lessons}</span> */}
-                  <span><i className="far fa-clock"></i> {course.duration}</span>
+                  <span><FontAwesomeIcon icon={faClock} /> {course.duration}</span>
                 </div>
               </div>
             </div>

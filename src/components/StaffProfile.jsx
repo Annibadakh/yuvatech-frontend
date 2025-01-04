@@ -355,6 +355,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {  FaEyeSlash } from 'react-icons/fa'; // Import eye icons
 import Swal from 'sweetalert2';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUpload } from '@fortawesome/free-solid-svg-icons';
 
 import { Button } from 'reactstrap';
 import { FaEye } from 'react-icons/fa';
@@ -601,7 +603,7 @@ const BasicInformationForm = () => {
                       </div>
                       <div className="upload-img">
                         <div className="change-photo-btn">
-                          <span><i className="fa fa-upload"></i> Upload Photo</span>
+                        <div style={{width:"150px"}}><FontAwesomeIcon icon={faUpload} /> Upload Photo</div>
                           <input type="file" className="upload" accept=".png, .jpg, .jpeg" onChange={handleFileChange} />
                         </div>
                         <small className="form-text text-muted">Allowed JPG, PNG and JPEG. Max size of 2MB</small>
@@ -815,6 +817,7 @@ const BasicInformationForm = () => {
             value={passwordData.oldPassword}
             onChange={handlePasswordChange}
             required
+            style={{marginTop:"0px"}}
           />
           <span
             className="input-group-text"
@@ -840,6 +843,7 @@ const BasicInformationForm = () => {
             value={passwordData.newPassword}
             onChange={handlePasswordChange}
             required
+            style={{marginTop:"0px"}}
           />
           <span
             className="input-group-text"
@@ -865,6 +869,7 @@ const BasicInformationForm = () => {
             value={passwordData.confPassword}
             onChange={handlePasswordChange}
             required
+            style={{marginTop:"0px"}}
           />
           <span
             className="input-group-text"

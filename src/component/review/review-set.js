@@ -30,7 +30,7 @@ const Review = ({ image, name, description, college }) => {
           <h4>{college}</h4>
         </div>
       </div>
-      <p>{description}</p>
+      <p style={{textAlign:"justify" , fontSize:"1.4rem"}}>{description}</p>
     </div>
   );
 };
