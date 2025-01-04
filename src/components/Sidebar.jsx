@@ -54,8 +54,9 @@ const SidebarMenu = styled.ul`
 `;
 
 const SidebarMenuItem = styled.li`
-  background: ${({ active }) => (active ? '#d2a0ff' : 'transparent')};
-  border-left: ${({ active }) => (active ? '4px solid #632ce4' : 'none')};
+  background: ${({ active }) => (active ? '#3c91e6' : 'transparent')};
+  color: ${({ active }) => (active ? '#632ce4' : 'transparent')};
+  border-left: ${({ active }) => (active ? '4px solid #3c91e6' : 'none')};
       border-radius: ${({ active }) => (active ? '10px' : '0')}; // Apply border-radius to active items
           // border: solid 1px;
     border-radius: 20px;
@@ -72,8 +73,8 @@ const SidebarMenuItem = styled.li`
     border-radius: ${({ active }) => (active ? '10px' : '0')}; // Apply border-radius to active items
 
     &:hover {
-      background: rgb(237, 231, 246);
-      border-left: 4px solid #632ce4;
+      background:rgb(213, 229, 245);
+      border-left: 4px solid #3c91e6;
       border-radius:10px;
     }
   }
@@ -102,9 +103,8 @@ const DropdownMenu = styled.ul`
 
 
       &:hover {
-        background: #632ce4;
-        color: rgb(237, 231, 246);
-              border-radius:10px;
+        background: #3c91e6;
+        border-radius:10px;
 
       }
     }
@@ -342,7 +342,7 @@ const Sidebar = () => {
     <NavLink 
       to="/courses" 
       onClick={handleNavLinkClick}
-      style={{ background: activeItem === 'viewcourses' ? '#d2a0ff' : '' }}
+      style={{ background: activeItem === 'viewcourses' ? '#3c91e6' : ''}}
     >
       View Courses
     </NavLink>
@@ -352,7 +352,7 @@ const Sidebar = () => {
     <NavLink 
       to="/courses/add" 
       onClick={handleNavLinkClick}
-      style={{ background: activeItem === 'addcourse' ? '#d2a0ff' : 'transparent' }}
+      style={{ background: activeItem === 'addcourse' ? '#3c91e6' : 'transparent' }}
     >
       Add Course
     </NavLink>
@@ -373,7 +373,7 @@ const Sidebar = () => {
     <NavLink 
       to="/users" 
       onClick={handleNavLinkClick}
-      style={{ background: activeItem === 'viewusers' ? '#d2a0ff' : '' }}
+      style={{ background: activeItem === 'viewusers' ? '#3c91e6' : '' }}
     >
       View Users
     </NavLink>
@@ -383,7 +383,7 @@ const Sidebar = () => {
     <NavLink 
       to="/users/add" 
       onClick={handleNavLinkClick}
-      style={{ background: activeItem === 'addusers' ? '#d2a0ff' : 'transparent' }}
+      style={{ background: activeItem === 'addusers' ? '#3c91e6' : 'transparent' }}
     >
       Add Users
     </NavLink>
@@ -404,7 +404,7 @@ const Sidebar = () => {
       <NavLink 
         to="/paymentdetails" 
         onClick={handleNavLinkClick}
-        style={{ background: activeItem === 'viewpayments' ? '#d2a0ff' : '' }}
+        style={{ background: activeItem === 'viewpayments' ? '#3c91e6' : '' }}
       >
         View Payments
       </NavLink>
@@ -414,7 +414,7 @@ const Sidebar = () => {
       <NavLink 
         to="/payments" 
         onClick={handleNavLinkClick}
-        style={{ background: activeItem === 'addpayments' ? '#d2a0ff' : 'transparent' }}
+        style={{ background: activeItem === 'addpayments' ? '#3c91e6' : 'transparent' }}
       >
         Add Payments
       </NavLink>
@@ -438,7 +438,7 @@ const Sidebar = () => {
     <NavLink 
       to="/courses/viewenrollments" 
       onClick={handleNavLinkClick}
-      style={{ background: activeItem === 'viewenrollments' ? '#d2a0ff' : '' }}
+      style={{ background: activeItem === 'viewenrollments' ? '#3c91e6' : '' }}
     >
       Ongoing 
     </NavLink>
@@ -448,7 +448,7 @@ const Sidebar = () => {
     <NavLink 
       to="/cancelledenrollments" 
       onClick={handleNavLinkClick}
-      style={{ background: activeItem === 'cancelledenrollments' ? '#d2a0ff' : 'transparent' }}
+      style={{ background: activeItem === 'cancelledenrollments' ? '#3c91e6' : 'transparent' }}
     >
       Cancelled 
     </NavLink>
@@ -458,7 +458,7 @@ const Sidebar = () => {
     <NavLink 
       to="/completedenrollments" 
       onClick={handleNavLinkClick}
-      style={{ background: activeItem === 'completedenrollments' ? '#d2a0ff' : 'transparent' }}
+      style={{ background: activeItem === 'completedenrollments' ? '#3c91e6' : 'transparent' }}
     >
       Completed 
     </NavLink>
@@ -479,13 +479,13 @@ const Sidebar = () => {
           </NavLink>
           <DropdownMenu isOpen={dropdowns['student']}>
             <li>
-              <NavLink to="/student" onClick={handleNavLinkClick} style={{ background: activeItem === 'student' ? '#d2a0ff' : 'transparent' }}>Add Enquiry</NavLink>
+              <NavLink to="/student" onClick={handleNavLinkClick} style={{ background: activeItem === 'student' ? '#3c91e6' : 'transparent' }}>Add Enquiry</NavLink>
             </li>
             <li>
-              <NavLink to="/studentinfo" style={{ background: activeItem === 'studentinfo' ? '#d2a0ff' : 'transparent'}} onClick={handleNavLinkClick}>View Students</NavLink>
+              <NavLink to="/studentinfo" style={{ background: activeItem === 'studentinfo' ? '#3c91e6' : 'transparent'}} onClick={handleNavLinkClick}>View Students</NavLink>
             </li>
             <li>
-              <NavLink to="/register" style={{ background: activeItem === 'register' ? '#d2a0ff' : 'transparent'}} onClick={handleNavLinkClick}>Enroll Student</NavLink>
+              <NavLink to="/register" style={{ background: activeItem === 'register' ? '#3c91e6' : 'transparent'}} onClick={handleNavLinkClick}>Enroll Student</NavLink>
             </li>
           </DropdownMenu>
         </SidebarMenuItem>

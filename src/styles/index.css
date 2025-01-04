@@ -357,9 +357,9 @@ body {
 
 /* MAIN */
 #content main {
-  width: 100%;
-  min-height: 100vh;
-  padding: 36px 24px;
+  width: 99%;
+  min-height: 90vh;
+  padding: 5px 10px;
   font-family: var(--poppins);
   max-height: calc(100vh - 56px);
   overflow-y: auto;

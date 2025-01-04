@@ -293,8 +293,7 @@ const printInvoice = () => {
             <span className={`${styles["text-bold"]} ${styles["text-center"]}`}>
               NOTE:&nbsp;
             </span>
-            This is computer generated receipt and does not require physical
-            signature.
+            Payment is non-refundable after 8 days from the date of payment.
           </p>
 
         </div>

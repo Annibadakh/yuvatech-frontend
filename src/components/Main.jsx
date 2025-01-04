@@ -17,7 +17,7 @@ const FinancialCard = ({ color, icon, amount, description }) => {
         padding: '25px',
         fontFamily: 'Times New Roman, Times, serif',
         minWidth: "220px",
-        minHeight: "120px"
+        minHeight: "150px"
     };
 
     const iconStyle = {
@@ -82,11 +82,11 @@ const Main = () => {
 
     return (
         <main>
-            {/* <div className="head-title">
+            <div className="head-title">
                 <div className="left">
                     <h1>Dashboard</h1>
                 </div>
-            </div> */}
+            </div>
             <ul className="box-info">
                 <div className="row" style={{justifyContent:'center'}}>
                     <FinancialCard

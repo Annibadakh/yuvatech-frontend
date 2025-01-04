@@ -538,7 +538,7 @@ const FormEditUser = () => {
     //                 </select>
     //             </div>
     //             <div className="form-actions">
-    //                 <button type="submit" className="button is-success" style={{ backgroundColor: '#0056b3', color: 'white' }}>Update</button>
+    //                 <button type="submit" className="button is-success" style={{ backgroundColor: '#3c91e6', color: 'white' }}>Update</button>
     //             </div>
     //         </form>
     //     </div>

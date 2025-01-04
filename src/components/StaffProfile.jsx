@@ -819,7 +819,7 @@ const BasicInformationForm = () => {
           <span
             className="input-group-text"
             onClick={() => setShowOldPassword(!showOldPassword)}
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: 'pointer', marginBottom:"0.85rem" }}
           >
             {showOldPassword ? <FaEye /> : <FaEyeSlash />}
           </span>
@@ -844,7 +844,7 @@ const BasicInformationForm = () => {
           <span
             className="input-group-text"
             onClick={() => setShowNewPassword(!showNewPassword)}
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: 'pointer', marginBottom:"0.85rem" }}
           >
             {showNewPassword ? <FaEye /> : <FaEyeSlash />}
           </span>
@@ -869,7 +869,7 @@ const BasicInformationForm = () => {
           <span
             className="input-group-text"
             onClick={() => setShowConfPassword(!showConfPassword)}
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: 'pointer', marginBottom:"0.85rem" }}
           >
             {showConfPassword ? <FaEye /> : <FaEyeSlash />}
           </span>
@@ -878,9 +878,9 @@ const BasicInformationForm = () => {
     </div>
 
     <div className="col-12">
-      <Button color="primary" onClick={handlePasswordSubmit}>
+      <button onClick={handlePasswordSubmit}>
         Update Password
-      </Button>
+      </button>
     </div>
   </div>
 )}
