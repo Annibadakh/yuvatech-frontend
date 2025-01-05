@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './ExpenseTracker.css';
+import { Button } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import BudgetSorting from './BudgetSorting.jsx';
+
 
 function BudgetApp() {
   const [totalAmount, setTotalAmount] = useState(0);
@@ -60,6 +65,8 @@ function BudgetApp() {
       .catch(err => console.error('Error fetching amount data:', err));
   };
 
+  
+
   const handleTotalAmountButtonClick = () => {
     const newTotalAmount = parseInt(totalAmount);
     if (isNaN(newTotalAmount) || newTotalAmount <= 0) {
@@ -70,7 +77,10 @@ function BudgetApp() {
     const updatedInitialValues = {
       sendtotalamount: amountdata.totalamount + newTotalAmount,
       sendexpenses: amountdata.expenses,
-      sendbalance: amountdata.balance + newTotalAmount
+      sendbalance: amountdata.balance + newTotalAmount,
+      sendcurrval: newTotalAmount,
+      sendamounttype: "Amount",
+      sendpaymentid: "externalAmount"
     };
 
     console.log(updatedInitialValues);
@@ -103,7 +113,10 @@ function BudgetApp() {
         const updatedValues = {
           sendtotalamount: amountdata.totalamount,
           sendexpenses: amountdata.expenses + newUserAmount,
-          sendbalance: amountdata.balance - newUserAmount
+          sendbalance: amountdata.balance - newUserAmount,
+          sendcurrval: newUserAmount,
+          sendamounttype: "Expense",
+          sendpaymentid: "externalExpense"
         };
         console.log(updatedValues);
 
@@ -119,7 +132,10 @@ function BudgetApp() {
         const updatedExpensesValues = {
           sendtotalamount: amountdata.totalamount,
           sendexpenses: amountdata.expenses + diff,
-          sendbalance: amountdata.balance - diff
+          sendbalance: amountdata.balance - diff,
+          sendcurrval: diff,
+          sendamounttype: "Expense",
+          sendpaymentid: "externalExpense"
         };
 
         requests = [
@@ -166,6 +182,7 @@ function BudgetApp() {
 });
 
 
+
   return (
     <div className="wrapper">
       <div className="container">
@@ -183,6 +200,8 @@ function BudgetApp() {
               Set Budget
             </button>
           </div>
+
+          
 
           <div className="user-amount-container">
             <h3>Expenses</h3>
@@ -220,12 +239,15 @@ function BudgetApp() {
           </div>
         </div>
       </div>
+
+      <div><BudgetSorting /></div>
       <div className="list">
         <h3>Expense List</h3>
         <div className="date-filter">
           <label>
             From:
             <input
+              style={{width:"150px"}}
               type="date"
               value={fromDate}
               onChange={(e) => setFromDate(e.target.value)}
@@ -234,6 +256,7 @@ function BudgetApp() {
           <label>
             To:
             <input
+              style={{width:"150px"}}
               type="date"
               value={toDate}
               onChange={(e) => setToDate(e.target.value)}
@@ -258,7 +281,10 @@ function BudgetApp() {
                 <p className="amount">{data.amount}</p>
                 <p className="date">{new Date(data.currdate).toISOString().split('T')[0]}</p>
                 <p className="time">{data.currtime}</p>
-                <button onClick={() => handleEditExpense(data)} className='submit'>Edit</button>
+                {/* <button onClick={() => handleEditExpense(data)} className='submit'>Edit</button> */}
+                <Button color="primary" onClick={() => handleEditExpense(data)} className='submit' style={{ marginRight: '5px' }}>
+              <FontAwesomeIcon icon={faEdit} />
+            </Button>
             </div>
         ))}
         </div>

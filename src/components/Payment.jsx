@@ -794,7 +794,10 @@ const validatePaymentAmount = (paymentAmount, balanceAmount, discount) => {
       const updatedInitialValues = {
         sendtotalamount: amountdata.totalamount + newTotalAmount,
         sendexpenses: amountdata.expenses,
-        sendbalance: amountdata.balance + newTotalAmount
+        sendbalance: amountdata.balance + newTotalAmount,
+        sendcurrval: newTotalAmount,
+        sendamounttype: "Amount",
+        sendpaymentid: newPaymentId
       };
       await axios.post(`${apiUrl}/amount/initialValues`, updatedInitialValues);
   

@@ -6336,13 +6336,6 @@ function PaymentForm() {
     }
   
     try {
-      const newTotalAmount = parseInt(paymentData.paymentAmount);
-      const updatedInitialValues = {
-        sendtotalamount: amountdata.totalamount + newTotalAmount,
-        sendexpenses: amountdata.expenses,
-        sendbalance: amountdata.balance + newTotalAmount
-      };
-      await axios.post(`${apiUrl}/amount/initialValues`, updatedInitialValues);
       
       let newPaymentId = paymentId; // Use existing paymentId if available
 
@@ -6356,6 +6349,17 @@ function PaymentForm() {
           duedate: paymentData.duedate
         });
 
+        const newTotalAmount = parseInt(paymentData.paymentAmount);
+        const updatedInitialValues = {
+        sendtotalamount: amountdata.totalamount + newTotalAmount,
+        sendexpenses: amountdata.expenses,
+        sendbalance: amountdata.balance + newTotalAmount,
+        sendcurrval: newTotalAmount,
+        sendamounttype: "Amount",
+        sendpaymentid: paymentId
+        };
+        await axios.post(`${apiUrl}/amount/initialValues`, updatedInitialValues);
+      
 
   
         Swal.fire('Success', 'Payment updated successfully!', 'success');
@@ -6371,6 +6375,18 @@ function PaymentForm() {
        
         newPaymentId = response.data.payment.paymentId;
       console.log(`PaymentID is ${newPaymentId}`);
+
+      const newTotalAmount = parseInt(paymentData.paymentAmount);
+      const updatedInitialValues = {
+        sendtotalamount: amountdata.totalamount + newTotalAmount,
+        sendexpenses: amountdata.expenses,
+        sendbalance: amountdata.balance + newTotalAmount,
+        sendcurrval: newTotalAmount,
+        sendamounttype: "Amount",
+        sendpaymentid: newPaymentId
+      };
+      await axios.post(`${apiUrl}/amount/initialValues`, updatedInitialValues);
+      
         
 
         // Assuming the backend returns the created payment ID in response.data
