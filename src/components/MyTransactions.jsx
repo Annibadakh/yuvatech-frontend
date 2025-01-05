@@ -36,6 +36,7 @@ const PaymentDetails = () => {
     try {
       const response = await axios.get(`${apiUrl}/mypayments`);
       setData(response.data);
+      console.log(response.data);
     } catch (error) {
       Swal.fire({
         icon: 'error',

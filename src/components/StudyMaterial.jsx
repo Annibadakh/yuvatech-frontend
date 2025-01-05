@@ -188,6 +188,7 @@ const CourseDocumentList = () => {
           title: 'No Documents Available',
           text: 'There are no documents available for this course.',
         });
+        navigate("/myenrollments");
       } else {
         Swal.fire({
           icon: 'error',

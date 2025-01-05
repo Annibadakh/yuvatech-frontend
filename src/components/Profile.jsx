@@ -383,7 +383,7 @@ const BasicInformationForm = () => {
                 </div>
               )}
               <div className="submit-section">
-                <button type="submit" className="btn btn-primary submit-btn">Save Changes</button>
+                <button type="submit" className="submit-btn">Save Changes</button>
               </div>
             </form>
           </div>

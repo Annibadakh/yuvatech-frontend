@@ -1026,7 +1026,7 @@ function StudentRegistrationForm() {
             <div className="col-md-7 col-lg-8 col-xl-9" style={{ width: '100%' }}>
             <div className="card" style={{ width: 'inherit' }}>
               <div className="card-body">
-            <h2 style={titleStyle}>Enquiry Form</h2><br />
+            <h2 style={titleStyle}></h2><br />
             {message && <p className="error-message">{message}</p>}
             <form onSubmit={handleSubmit} style={{ width: '100%' }}>        
                 

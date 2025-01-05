@@ -149,8 +149,10 @@ const Sidebar = () => {
   }, []);
   useEffect(() => {
     const pathMap = {
-      // '/dashboard': 'dashboard',
-      // '/myProfile': 'myprofile',
+      '/studentdashboard': 'studentdashboard',
+      '/profile': 'profile',
+      '/myenrollments': 'myenrollments',
+      '/mytransactions': 'mytransactions',
       //  '/courses': 'viewcourses',
       // '/courses/add': 'addcourse',
       // '/users/view': 'viewusers',
@@ -234,7 +236,7 @@ const Sidebar = () => {
   };
 
   return (
-    <SidebarSection isSidebarHidden={isSidebarHidden}>
+    <SidebarSection isSidebarHidden={isSidebarHidden} style={{borderRight:"1px solid gray"}}>
 
       <SidebarHeader to={userRole === 'student' ? '/studentdashboard' : '/dashboard'}>
         <img className='sidebar-icon' src={icon} alt="Icon" />
@@ -277,14 +279,14 @@ const Sidebar = () => {
       </div>
 {isStudent() && (
 <SidebarMenu>
-  <SidebarMenuItem active={activeItem === 'dashboard'}>
+  <SidebarMenuItem active={activeItem === 'studentdashboard'}>
     <NavLink to={userRole === 'student' ? '/studentdashboard' : '/dashboard'} onClick={handleNavLinkClick}>       
       
       <i className='bx bxs-dashboard'></i>
       <span>Dashboard</span>
     </NavLink>
   </SidebarMenuItem>
-  <SidebarMenuItem active={activeItem === 'myenrollments'}>
+  <SidebarMenuItem active={activeItem === 'profile'}>
     <NavLink to={userRole === 'student' ? '/profile' : '/myprofile'} onClick={handleNavLinkClick}>       
       
       <i className='bx bxs-dashboard'></i>
@@ -298,7 +300,7 @@ const Sidebar = () => {
       <span>My Enrollments</span>
     </NavLink>
   </SidebarMenuItem>
-  <SidebarMenuItem active={activeItem === 'myenrollments'}>
+  <SidebarMenuItem active={activeItem === 'mytransactions'}>
     <NavLink to={userRole === 'student' ? '/mytransactions' : '/dashboard'} onClick={handleNavLinkClick}>       
       
       <i className='bx bxs-dashboard'></i>

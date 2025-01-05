@@ -23,8 +23,6 @@ const StudentDashboard = () => {
   return (
     <Layout>
       <Welcome />
-      
-      <h1></h1>
     </Layout>
   );
 };

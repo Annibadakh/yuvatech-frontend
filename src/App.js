@@ -14,7 +14,6 @@ import EnrollStudent from "./pages/EnrollStudent.jsx";
 import PaymentForm from "./components/PaymentForm.jsx";
 import AddPayments from "./pages/AddPayments.jsx"
 import UpdatePayment from "./pages/UpdatePayment.jsx"
-import MyTransactions from "./pages/MyTransactions.jsx";
 import PaymentDetails from "./pages/ViewPayments.jsx";
 import UploadDocuments from "./pages/UploadDocuments.jsx";
 import ViewEnrollments from "./pages/ViewEnrollments.jsx"
@@ -30,6 +29,7 @@ import CourseDocuments from "./pages/CourseDocuments.jsx";
 import EditEnrollment from "./pages/EditEnrollment.jsx";
 import StudentInfo from "./pages/StudentInfo.jsx";
 import MyEnrollments from "./pages/MyEnrollments.jsx";
+import MyTransactions from "./pages/MyTransactions.jsx";
 import EditDocuments from "./pages/EditDocument.jsx";
 import Errors from "./pages/Error.jsx";
 import Studymaterial from "./pages/StudyMaterial.jsx";

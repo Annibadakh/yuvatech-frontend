@@ -98,6 +98,7 @@ const MyEnrollments = () => {
     try {
       const response = await axios.get(`${apiUrl}/myEnrollments`);
       setEnrollments(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error("Error fetching enrollments:", error);
       Swal.fire({
@@ -115,8 +116,13 @@ const MyEnrollments = () => {
   const columns = useMemo(() => [
     { Header: 'Sr No', accessor: (row, i) => i + 1 },
     { Header: 'Enrollment ID', accessor: 'enrollmentId' },
-    { Header: 'Course Name', accessor: 'course.name' },
     { Header: 'Enrollment Date', accessor: row => new Date(row.enrollmentDate).toLocaleDateString() },
+    { Header: 'Course Name', accessor: 'course.name' },
+    { Header: 'Total Fees', accessor: 'fee.totalFees' },
+    { Header: 'Applicable Fees', accessor: 'fee.applicableFees' },
+    { Header: 'Balance Amount', accessor: 'fee.balanceAmount' },
+    { Header: 'Due Date', accessor: row => new Date(row.fee.duedate).toLocaleDateString() },
+    
     { Header: 'Status', accessor: 'status' },
     {
       Header: 'Actions',
