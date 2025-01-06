@@ -185,6 +185,7 @@ function BudgetApp() {
 
   return (
     <div className="wrapper">
+      <div><BudgetSorting /></div>
       <div className="container">
         <div className="sub-container">
           <div className="total-amount-container">
@@ -240,7 +241,7 @@ function BudgetApp() {
         </div>
       </div>
 
-      <div><BudgetSorting /></div>
+      
       <div className="list">
         <h3>Expense List</h3>
         <div className="date-filter">

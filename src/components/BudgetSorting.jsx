@@ -12,7 +12,9 @@ const BudgetSorting = () => {
     const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1); // Default to current month
     const [entries, setEntries] = useState([]); // All entries fetched from API
     const [amount, setAmount] = useState(0); // Total amount for selected month
-    const [expense, setExpense] = useState(0); // Total expense for selected month
+    const [expense, setExpense] = useState(0);
+    const [course, setCourseAmount] = useState(0);
+    const [external, setExternalAmount] = useState(0); // Total expense for selected month
     const [loading, setLoading] = useState(false); // Loading state
     const [error, setError] = useState(null); // Error state
  
@@ -34,8 +36,8 @@ const BudgetSorting = () => {
         try {
             const response = await axios.get(`${apiurl}/amount/totallist`);
             console.log(response.data);
-            setEntries(response.data); // Store all fetched entries
-            processData(response.data); // Process data to calculate totals
+            setEntries(response.data.amountlist); // Store all fetched entries
+            processData(response.data.amountlist); // Process data to calculate totals
         } catch (err) {
             setError('Failed to fetch data. Please try again.');
         }
@@ -46,7 +48,7 @@ const BudgetSorting = () => {
     const processData = (data) => {
         // Filter data based on selected year and month
         console.log("Amount list is here", data);
-        const filteredData = data.amountlist.filter(entry => {
+        const filteredData = data.filter(entry => {
             const entryDate = new Date(entry.currdate);
             return entryDate.getFullYear() === selectedYear && entryDate.getMonth() + 1 === selectedMonth;
         });
@@ -55,11 +57,19 @@ const BudgetSorting = () => {
         // Initialize sums for amount and expense
         let totalAmount = 0;
         let totalExpense = 0;
+        let courseAmount = 0;
+        let externalAmount = 0;
 
         // Aggregate the total amount and expense by checking AmountType
         filteredData.forEach(entry => {
             if (entry.amountType === 'Amount') {
                 totalAmount += entry.currValue;
+                if(entry.paymentId !== "externalAmount"){
+                    courseAmount += entry.currValue;
+                }
+                else{
+                    externalAmount += entry.currValue;
+                }
             } else if (entry.amountType === 'Expense') {
                 totalExpense += entry.currValue;
             }
@@ -67,7 +77,11 @@ const BudgetSorting = () => {
         console.log(totalAmount, totalExpense);
 
         setAmount(totalAmount);
+        setCourseAmount(courseAmount);
+        setExternalAmount(externalAmount);
         setExpense(totalExpense);
+
+
     };
 
     // Trigger data fetch when year or month is changed
@@ -105,7 +119,7 @@ const BudgetSorting = () => {
     };
 
     return (
-        <div className="p-4" style={{display:"flex", justifyContent:"space-between", padding:"100px"}}>
+        <div className="container" style={{display:"flex", flexWrap:"wrap", justifyContent:"space-between", padding:"25px"}}>
             <div>
             <h1 className="text-2xl font-bold mb-4">Monthly Amount and Expense</h1>
 
@@ -144,6 +158,25 @@ const BudgetSorting = () => {
                     ))}
                 </select>
             </div>
+            {loading ? (
+                <p>Loading...</p>
+            ) : error ? (
+                <p className="text-red-500">{error}</p>
+            ) : (
+            <div>
+                    <p>
+                        <strong>Amount: ₹</strong>{amount || 0}
+                    </p>
+                    <p>
+                        <strong>Expense: ₹</strong>{expense || 0}
+                    </p>
+                    <p>
+                        <strong>Course Amount: ₹</strong>{course || 0}
+                    </p>
+                    <p>
+                        <strong>External Amount: ₹</strong>{external || 0}
+                    </p></div>
+                )}
             </div>
 
             {/* Month Selector */}
@@ -156,12 +189,7 @@ const BudgetSorting = () => {
                 <p className="text-red-500">{error}</p>
             ) : (
                 <div className="mt-4">
-                    <p>
-                        <strong>Amount: ₹</strong>{amount || 0}
-                    </p>
-                    <p>
-                        <strong>Expense: ₹</strong>{expense || 0}
-                    </p>
+                    
 
                     {/* Pie Chart */}
                     <div className="mt-8">
