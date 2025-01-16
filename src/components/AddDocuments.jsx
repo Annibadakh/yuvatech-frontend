@@ -3,6 +3,8 @@ import { useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Button } from 'reactstrap';
 import { FaEye } from 'react-icons/fa';
+import Loader from '../loader/Loader';
+
 function AddDocuments({ onDocumentsSubmit, studentId }) {
   const location = useLocation();
   const { studentId: pathStudentId } = useParams(); // For path parameter (/students/:studentId)

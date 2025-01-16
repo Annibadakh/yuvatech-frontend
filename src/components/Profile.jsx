@@ -7,9 +7,10 @@ import { FaEye } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AddDocuments from './AddDocuments';
-
+import Loader from '../loader/Loader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
+import { set } from 'lodash';
 const BasicInformationForm = () => {
   const [formData, setFormData] = useState({
     firstName: '',
@@ -35,7 +36,7 @@ const BasicInformationForm = () => {
   const [showIdentityDocuments, setShowIdentityDocuments] = useState(false);
   const [showProfile, setShowProfile] = useState(true);
   const apiUrl = process.env.REACT_APP_API_BASE_URL
-
+const [loading,setloading] = useState(false);
 
   const [identityImagePreview, setIdentityImagePreview] = useState(null);
 
@@ -43,6 +44,7 @@ const BasicInformationForm = () => {
 
   useEffect(() => {
     const fetchProfileData = async () => {
+      setloading(true);
       try {
         const response = await axios.get(`${apiUrl}/profile`);
         const data = response.data;
@@ -51,6 +53,9 @@ const BasicInformationForm = () => {
         setStudentId(data.studentId); // Set the student ID
       } catch (error) {
         console.error('Error fetching profile data:', error);
+      }
+      finally{
+        setloading(false);
       }
     };
 
@@ -126,6 +131,7 @@ const BasicInformationForm = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setloading(true);
     try {
       // Update basic profile data
       await axios.patch(`${apiUrl}/profile`, formData);
@@ -144,8 +150,15 @@ const BasicInformationForm = () => {
       toast.success('Profile updated successfully!', { position: toast.POSITION.TOP_RIGHT });    } catch (error) {
       console.error('Error updating profile:', error);
     }
+    finally{
+      setloading(false);
+    }
   };
 
+  if(loading){
+    return <Loader />;
+  }
+  
   return (
     <div className='container'>
           <ToastContainer />

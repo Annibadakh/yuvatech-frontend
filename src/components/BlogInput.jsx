@@ -5,6 +5,8 @@ import ReactQuill from 'react-quill';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import 'react-quill/dist/quill.snow.css'; // Import the styles
+import Loader from '../loader/Loader';
+
 const BlogInput = () => {
   const [formData, setFormData] = useState({
     title: '',
@@ -18,14 +20,20 @@ const BlogInput = () => {
   const [error, setError] = useState(null);
   const [photoPreview, setPhotoPreview] = useState('');
   const apiUrl = process.env.REACT_APP_API_BASE_URL;
+  const [loading, setLoading] = useState(true); // Loading state
 
   // Fetch all blogs
   const fetchBlogs = async () => {
+    setLoading(true);
+
     try {
       const response = await axios.get(`${apiUrl}/getblog`);
       setBlogs(response.data);
     } catch (error) {
       console.error("Error fetching blogs:", error);
+    }
+    finally {
+      setLoading(false); // End loading
     }
   };
 
@@ -58,6 +66,8 @@ const BlogInput = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
 
     const { title, description, date, photo } = formData;
 
@@ -100,6 +110,9 @@ const BlogInput = () => {
       setError(errorMessage);
       console.error('Error submitting the blog:', errorMessage);
     }
+    finally {
+      setLoading(false); // End loading
+    }
   };
 
   const handleReset = () => {
@@ -134,6 +147,10 @@ const BlogInput = () => {
       console.error("Error deleting blog:", error);
     }
   };
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className="container">

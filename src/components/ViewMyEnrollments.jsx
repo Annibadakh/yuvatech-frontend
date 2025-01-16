@@ -1,78 +1,4 @@
 
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-// import { Link } from 'react-router-dom';
-// import { FaEdit, FaTrash } from 'react-icons/fa'; // Import FontAwesome icons
-
-// const MyEnrollments = () => {
-//   const [enrollments, setEnrollments] = useState([]);
-//   const apiUrl = process.env.REACT_APP_API_BASE_URL
-
-//   useEffect(() => {
-//     getEnrollments();
-//   }, []);
-
-//   const getEnrollments = async () => {
-//     try {
-//       const response = await axios.get(`${apiUrl}/myEnrollments`);
-//       // console.log("Enrollments data:", response.data);
-
-//       setEnrollments(response.data);
-//     } catch (error) {
-//       // console.error("Error fetching enrollments:", error);
-//     }
-//   };
-
-//   const titleStyle = {
-//     fontFamily: 'Times New Roman, Times, serif'
-//   };
-//   return (
-//     <div>
-//       <h1 style={titleStyle} className="title">My Enrollments</h1>
-//       {/* <h2 style={titleStyle} className="subtitle">List of Enrollments</h2> */}
-     
-//       <table className="table is-striped is-fullwidth">
-//         <thead>
-//           <tr>
-//             <th>sr no</th>
-//             <th>Enrollment ID</th>
-//             <th>Course Name</th>
-//             <th>Enrollment Date</th>
-//             <th>Status</th>
-//             <th>Actions</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {enrollments.length > 0 ? (
-//             enrollments.map((enrollment, index) => (
-//               <tr key={enrollment.enrollmentId}>
-//                 <td>{index + 1}</td>
-//                 <td>{enrollment.enrollmentId}</td>
-//                 <td>{enrollment.course.name}</td>
-//                 <td>{new Date(enrollment.enrollmentDate).toLocaleDateString()}</td>
-//                 <td>{enrollment.status}</td>
-//                 <td>
-//                   <Link to={`/courses/studymaterial/${enrollment.courseId}`} className="button is-small is-info">
-//                     View Documents
-//                   </Link>
-//                 </td>
-//               </tr>
-//             ))
-//           ) : (
-//             <tr>
-//               <td colSpan="6">No enrollments available</td>
-//             </tr>
-//           )}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// };
-
-// export default MyEnrollments;
-
-
-
 import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
@@ -83,18 +9,19 @@ import { useTable, usePagination, useGlobalFilter, useSortBy } from 'react-table
 import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import Loader from '../loader/Loader';
 const MyEnrollments = () => {
   const [enrollments, setEnrollments] = useState([]);
   const navigate = useNavigate();
   const userRole = useSelector(state => state.auth.user?.role);
   const apiUrl = process.env.REACT_APP_API_BASE_URL;
-
+const [loading, setLoading] = useState(false); // Loading state
   useEffect(() => {
     getEnrollments();
   }, []);
 
   const getEnrollments = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(`${apiUrl}/myEnrollments`);
       setEnrollments(response.data);
@@ -106,6 +33,9 @@ const MyEnrollments = () => {
         title: 'Error fetching enrollments',
         text: error.message
       });
+    }
+    finally{
+      setLoading(false);
     }
   };
 
@@ -160,6 +90,10 @@ const MyEnrollments = () => {
     useSortBy,
     usePagination
   );
+
+  if(loading){
+    return <Loader />;
+  }
 
   return (
     <div>

@@ -6,7 +6,7 @@ import { Button } from 'reactstrap';
 import { useMultiStepForm } from './MultiStepFormContext';
 import './StudentRegistration.css';
 import Swal from 'sweetalert2';
-
+import Loader from '../loader/Loader';
 function EnrollmentForm({ onEnrollmentSubmit,enrollmentId: receivedEnrollmentId, studentId:responsestudentId, }) {
   const location = useLocation();
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ function EnrollmentForm({ onEnrollmentSubmit,enrollmentId: receivedEnrollmentId,
   const queryEnrollmentId = queryParams.get('enrollmentId');
   const studentId = pathStudentId || queryStudentId || responsestudentId;
   const enrollmentId = pathEnrollmentId || queryEnrollmentId || receivedEnrollmentId;
-
+const[loading,setLoading] = useState(false);
   const { setEnrollmentId, setStudentId } = useMultiStepForm();
   useEffect(() => {
     console.log(`EnrollmentForm received enrollmentId: ${enrollmentId}`);
@@ -104,6 +104,7 @@ function EnrollmentForm({ onEnrollmentSubmit,enrollmentId: receivedEnrollmentId,
     const fetchEnrollmentDetails = async () => {
       if (enrollmentId) {
         try {
+          
           const response = await axios.get(`${apiUrl}/enroll/${enrollmentId}`);
           setFormData((prevFormData) => ({
             ...prevFormData,
@@ -114,8 +115,11 @@ function EnrollmentForm({ onEnrollmentSubmit,enrollmentId: receivedEnrollmentId,
         } catch (error) {
           console.error('Failed to fetch enrollment details:', error);
           // Optionally, handle the error here, but do not set the message
+        }finally {
+          setLoading(false);  
         }
-      }
+      
+      }  
     };
   
     fetchEnrollmentDetails();
@@ -161,6 +165,7 @@ function EnrollmentForm({ onEnrollmentSubmit,enrollmentId: receivedEnrollmentId,
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     if (!formData.courseId) {
       Swal.fire('Error', 'Please select a course before submitting the form.', 'error');
       return;
@@ -224,6 +229,9 @@ function EnrollmentForm({ onEnrollmentSubmit,enrollmentId: receivedEnrollmentId,
       setError('An unexpected error occurred');
       console.error('An unexpected error occurred:', error);
     }
+    finally {
+      setLoading(false);  
+    }
   
     // Log when studentId is passed
     console.log('Current studentId:', formData.studentId);
@@ -257,6 +265,11 @@ function EnrollmentForm({ onEnrollmentSubmit,enrollmentId: receivedEnrollmentId,
     setPhotoPreview(null);
     setIdentityImagePreview(null);
   };
+
+  if (loading) {
+    return <Loader />;
+  }
+
 
   return (
     <div className="container">

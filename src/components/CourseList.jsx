@@ -1,149 +1,3 @@
-
-// import React, { useState, useEffect } from "react";
-// import axios from "axios";
-// import { Link } from "react-router-dom";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import Swal from "sweetalert2";
-
-// const CourseList = () => {
-//   const [courses, setCourses] = useState([]);
-//   const [loading, setLoading] = useState(true);
-//   const apiUrl = process.env.REACT_APP_API_BASE_URL;
-
-//   useEffect(() => {
-//     getCourses();
-//   }, []);
-
-//   const getCourses = async () => {
-//     try {
-//       const response = await axios.get(`${apiUrl}/courses`);
-//       setCourses(response.data);
-//       setLoading(false);
-//     } catch (error) {
-//       console.error("Error fetching courses:", error);
-//       setLoading(false);
-//       // Handle error gracefully, show error message to the user
-//       Swal.fire({
-//         icon: "error",
-//         title: "Oops...",
-//         text: "Failed to fetch courses. Please try again later.",
-//       });
-//     }
-//   };
-
-//   const deleteCourse = async (courseId) => {
-//     try {
-//       await axios.delete(`${apiUrl}/courses/${courseId}`);
-//       // Remove the deleted course from the state
-//       setCourses(courses.filter((course) => course.courseId !== courseId));
-//       Swal.fire({
-//         icon: "success",
-//         title: "Deleted Successfully",
-//         text: "",
-//       });
-//     } catch (error) {
-//       console.error("Error deleting course:", error);
-//       // Handle error gracefully, show error message to the user
-//       Swal.fire({
-//         icon: "error",
-//         title: "Oops...",
-//         text: "Failed to delete course. Please try again later.",
-//       });
-//     }
-//   };
-//   // const deleteCourse = async (courseId) => {
-//   //   try {
-//   //     await axios.delete(`${apiUrl}/courses/${courseId}`);
-//   //     Swal.fire({
-//   //       icon: "success",
-//   //       title: "Deleted Successfully",
-//   //       text: "",
-//   //     });
-//   //     setCourses(courses.filter((course) => course.courseId !== courseId));
-//   //   } catch (error) {
-//   //     console.error("Error deleting course:", error);
-//   //   }
-//   // };
-
-//   const titleStyle = {
-//     fontFamily: "Times New Roman, Times, serif",
-//     borderBottom: "1px solid #ccc",
-//     padding: "8px",
-//     textAlign: "center", // Align text to the center
-//     verticalAlign: "middle", // Align text vertically to the middle
-//   };
-
-//   const buttonStyle = {
-//     marginRight: "5px",
-//   };
-
-//   return (
-//     <div style={{ maxWidth: "100%", margin: "0 auto" }}>
-//       <div className="text-left mb-3">
-//         <Link to="/courses/add" className="btn btn-primary" style={buttonStyle}>
-//           Add New Course
-//         </Link>
-//       </div>
-//       <table className="table table-striped table-bordered">
-//         <thead>
-//           <tr>
-//             <th colSpan="6" style={titleStyle}>Courses</th>
-//           </tr>
-//           <tr>
-//             <th colSpan="6" style={titleStyle}>List of Courses</th>
-//           </tr>
-//           <tr>
-//             <th style={titleStyle}>No</th>
-//             <th style={titleStyle}>Course Name</th>
-//             <th style={titleStyle}>Description</th>
-//             <th style={titleStyle}>Exam Fees</th>
-//             <th style={titleStyle}>Course Fees</th>
-//             <th style={titleStyle}>Actions</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {courses.length > 0 ? (
-//             courses.map((course, index) => (
-//               <tr key={course.courseId}>
-//                 <td>{index + 1}</td>
-//                 <td>{course.name}</td>
-//                 <td>{course.description}</td>
-//                 <td>{course.examFees}</td>
-//                 <td>{course.courseFees}</td>
-//                 <td>
-//                   <div className="btn-group" role="group">
-//                     <Link to={`/courses/edit/${course.courseId}`} className="btn btn-sm btn-info" style={buttonStyle}>
-//                       <FontAwesomeIcon icon={faEdit} /> Edit
-//                     </Link>
-//                     <button onClick={() => deleteCourse(course.courseId)} className="btn btn-sm btn-danger" style={buttonStyle}>
-//                       <FontAwesomeIcon icon={faTrashAlt} /> Delete
-//                     </button>
-//                     <Link to={`/courses/viewcoursedocuments/${course.courseId}`} className="btn btn-sm btn-info" style={buttonStyle}>
-//                       View Documents
-//                     </Link>
-//                     <Link to={`/courses/editdocuments/${course.courseId}`} className="btn btn-sm btn-info">
-//                       Add Documents
-//                     </Link>
-//                   </div>
-//                 </td>
-//               </tr>
-//             ))
-//           ) : (
-//             <tr>
-//               <td colSpan="6">No courses available</td>
-//             </tr>
-//           )}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// };
-
-// export default CourseList;
-
-
 import React, { useEffect, useMemo, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -154,6 +8,7 @@ import Papa from 'papaparse';
 import { useTable, usePagination, useGlobalFilter, useSortBy } from 'react-table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Swal from 'sweetalert2';
+import Loader from '../loader/Loader';
 
 const CoursesList = () => {
   const [courses, setCourses] = useState([]);
@@ -161,9 +16,12 @@ const CoursesList = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const apiUrl = process.env.REACT_APP_API_BASE_URL;
+  const [loading, setLoading] = useState(true); // Loading state
 
   useEffect(() => {
     const fetchCourses = async () => {
+      setLoading(true);
+
       try {
         const response = await axios.get(`${apiUrl}/courses`);
         setCourses(response.data);
@@ -173,6 +31,9 @@ const CoursesList = () => {
           icon: 'error',
           title: 'Error fetching data'        
         });
+      }
+      finally {
+        setLoading(false); // End loading
       }
     };
     fetchCourses();
@@ -282,6 +143,10 @@ const CoursesList = () => {
     useSortBy,
     usePagination
   );
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div>

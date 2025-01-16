@@ -1,128 +1,3 @@
-
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-// import { Link, useNavigate, useParams } from 'react-router-dom';
-// // import { FaEdit, FaTrash } from 'react-icons/fa';
-// import { useSelector } from 'react-redux';
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-// const CourseDocumentList = () => {
-//   const [materials, setMaterials] = useState([]);
-//   const { id } = useParams();
-//   const navigate = useNavigate();
-//   const userRole = useSelector(state => state.auth.user?.role);
-//   const apiUrl = process.env.REACT_APP_API_BASE_URL
-
-//   useEffect(() => {
-//     getMaterials();
-//   }, []);
-
-//   useEffect(() => {
-//     const getCourseById = async () => {
-//       try {
-//         if (!id) {
-//           // console.log("Id not found");
-//           navigate("/courses");
-//           return;
-//         }
-//       } catch (error) {
-//         // console.error("Error fetching course by ID:", error);
-//       }
-//     };
-//     getCourseById();
-//   }, [id, navigate]);
-
-//   const getMaterials = async () => {
-//     try {
-//       const response = await axios.get(`${apiUrl}/materials/${id}`);
-//       setMaterials(response.data);
-//     } catch (error) {
-//       // console.error("Error fetching materials:", error);
-//     }
-//   };
-
-//   const deleteMaterial = async (materialId) => {
-//     try {
-//       await axios.delete(`${apiUrl}/materials/${materialId}`);
-//       setMaterials(materials.filter(material => material.materialId !== materialId));
-//     } catch (error) {
-//       // console.error('Error deleting material:', error);
-//     }
-//   };
-
-//   const viewDocument = (materialId) => {
-//     window.open(`${apiUrl}/materials/show/${materialId}`, '_blank');
-//   };
-//   const titleStyle = {
-//     fontFamily: 'Times New Roman, Times, serif'
-//   };
-  
-//   return (
-//     <div>
-//       <h1 style={titleStyle} className="title">Courses</h1>
-//       <h2 style={titleStyle} className="subtitle">List of Documents</h2>
-//       {/* <Link to="/courses/add" className="btn btn-primary mb-2">
-//         Add New Course
-//       </Link> */}
-//       <table className="table is-striped is-fullwidth">
-//         <thead>
-//           <tr>
-//             <th>No</th>
-//             <th>Document Name</th>
-//             <th>Description</th>
-//             <th>Document</th>
-//             {userRole !== "student" && <th>Actions</th>} {/* Conditionally render Actions column */}
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {materials.length > 0 ? (
-//             materials.map((material, index) => (
-//               <tr key={material.materialId}>
-//                 <td>{index + 1}</td>
-//                 <td>{material.title}</td>
-//                 <td>{material.description}</td>
-//                 <td>
-//                   {/* <button onClick={() => viewDocument(material.materialId)} className="button is-small is-info">
-//                     View Document
-//                   </button> */}
-//                   <Link onClick={() => viewDocument(material.materialId)} className="btn btn-sm btn-info mr-2">
-//                     View Documents
-//                   </Link>
-//                 </td>
-//                 {userRole !== "student" && (
-//                   <td>
-//                     {/* <button onClick={() => deleteMaterial(material.materialId)} className="button is-small is-danger">
-//                       <FaTrash />
-//                     </button>
-//                     <Link to={`/courses/editdocument/${material.materialId}`} className="button is-small is-info">
-//                       <FaEdit />
-//                     </Link> */}
-//                     <Link to={`/courses/editdocument/${material.materialId}`} className="btn btn-sm btn-info mr-2">
-//                     <FontAwesomeIcon icon={faEdit} /> Edit
-//                   </Link>
-//                   <button onClick={() => deleteMaterial(material.materialId)} className="btn btn-sm btn-danger mr-2">
-//                     <FontAwesomeIcon icon={faTrashAlt} /> Delete
-//                   </button>
-//                   </td>
-//                 )}
-//               </tr>
-//             ))
-//           ) : (
-//             <tr>
-//               <td colSpan={userRole !== "student" ? "5" : "4"}>No materials available</td> {/* Adjust colSpan based on Actions column */}
-//             </tr>
-//           )}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// };
-
-// export default CourseDocumentList;
-
-
-
-
 import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -133,6 +8,7 @@ import { useTable, usePagination, useGlobalFilter, useSortBy } from 'react-table
 import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Loader from '../loader/Loader';
 
 const CourseDocumentList = () => {
   const [materials, setMaterials] = useState([]);
@@ -140,6 +16,7 @@ const CourseDocumentList = () => {
   const navigate = useNavigate();
   const userRole = useSelector(state => state.auth.user?.role);
   const apiUrl = process.env.REACT_APP_API_BASE_URL;
+  const [loading, setLoading] = useState(true); // Loading state
 
   useEffect(() => {
     getMaterials();
@@ -174,6 +51,7 @@ const CourseDocumentList = () => {
   // };
 
   const getMaterials = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(`${apiUrl}/materials/${id}`);
       const materialsData = response.data;
@@ -198,6 +76,9 @@ const CourseDocumentList = () => {
         navigate("/courses");
       }
     }
+    finally {
+        setLoading(false); // End loading
+      }
     
   };
   
@@ -280,6 +161,12 @@ getMaterials();
     useSortBy,
     usePagination
   );
+
+
+  
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div>
