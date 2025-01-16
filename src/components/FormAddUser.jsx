@@ -1,141 +1,4 @@
 
-// import React, { useState ,useEffect} from 'react';
-// // import './UploadDocuments'; // Import CSS for consistent styling
-//  import axios from "axios";
-//  import { useNavigate } from "react-router-dom";
-// import { colors } from '@mui/material';
-// import Swal from 'sweetalert2';
-// import { ToastContainer, toast } from 'react-toastify';
-
-// const FormAddUser = () => {
-//     const [userData, setUserData,, setFormData] = useState({
-//         name: '',
-//         email: '',
-//         password: '',
-//         confPassword: '',
-//         role: ''
-//     });
-//     const [msg, setMsg] = useState('');
-//     const navigate = useNavigate();
-//     const apiUrl = process.env.REACT_APP_API_BASE_URL
-//     const [photoPreview, setPhotoPreview] = useState(''); // New state for image preview
-//     const [photo, setPhoto] = useState(null);
-//     const handleChange = (e) => {
-//         const { name, value } = e.target;
-//         setUserData(prevState => ({
-//             ...prevState,
-//             [name]: value
-//         }));
-//     };
-
-//     // useEffect(() => {
-//     //   const fetchProfileData = async () => {
-//     //     try {
-//     //       const response = await axios.get('http://localhost:5000/myprofile');
-//     //       const data = response.data;
-//     //       setFormData(data);
-//     //       setPhotoPreview(`http://localhost:5000/${data.photo}`); // Set the existing photo as preview
-//     //       // setStudentId(data.studentId); // Set the student ID
-//     //     } catch (error) {
-//     //       console.error('Error fetching profile data:', error);
-//     //     }
-//     //   };
-  
-//     //   fetchProfileData();
-//     // }, []);
-  
-//     const handleFileChange = (e) => {
-//       const file = e.target.files[0];
-//       if (file) {
-//         setPhoto(file);
-//         setPhotoPreview(URL.createObjectURL(file)); // Preview the selected image
-//       }
-//     };
-//     const handlePhotoChange = (event) => {
-//       const file = event.target.files[0];
-//       setFormData((prevFormData) => ({ ...prevFormData, photo: file }));
-//       const reader = new FileReader();
-//       reader.onload = () => {
-//         setPhotoPreview(reader.result);
-//       };
-//       reader.readAsDataURL(file);
-//     };
-  
-   
-  
- 
-  
-//     const saveUser = async (e) => {
-//         e.preventDefault();
-//         try {
-//             await axios.post(`${apiUrl}/users`, userData);
-//             Swal.fire({
-//                 icon: 'success',
-//                 title: 'User Added Successfully',
-//                 text: '',
-//               });
-//             navigate("/users");
-//         } catch (error) {
-//             if (error.response) {
-//                 setMsg(error.response.data.msg);
-//             }
-//         }
-//     };
-//     const titleStyle = {
-//         fontFamily: 'Times New Roman, Times, serif'
-//       };
-  
-//     return (
-//         <div className='container'>
-//               <ToastContainer />
-      
-//           <div className="col-md-7 col-lg-8 col-xl-9" style={{ width: '100%' }}>
-//             <div className="card" style={{ width: 'inherit' }}>
-//               <div className="card-body">
-//                 <h4 className="card-title">Basic Information</h4>
-//                 <ul className="nav nav-tabs nav-tabs-solid nav-tabs-rounded" style={{width:'fit-content'}}>
-//       <li className="nav-item">
-//         {/* <a 
-//           className={`nav-link ${showProfile ? 'active' : ''}`} 
-//           onClick={() => handleTabChange2('profile')}
-//           data-bs-toggle="tab"
-//         >
-//           Profile
-//         </a> */}
-//       </li>
-//       <li className="nav-item">
-//         {/* <a 
-//           className={`nav-link ${showIdentityDocuments ? 'active' : ''}`} 
-//         //   onClick={() => handleTabChange1('identityDocuments')}
-//           data-bs-toggle="tab"
-//         >
-//           Identity Documents
-//         </a> */}
-//       </li>
-//                 </ul>
-      
-//                             <br /><br />
-//                 <form onSubmit={saveUser}>
-//                 {/* {showProfile && ( */}
-      
-//                   <div className="row">
-//                     <div className="col-12">
-//                       <div className="mb-3">
-//                         <div className="change-avatar">
-//                           <div className="profile-img">
-//                             <img src={photoPreview} alt="User Image" />
-//                           </div>
-//                           <div className="upload-img">
-//                             <div className="change-photo-btn">
-//                               <span><i className="fa fa-upload"></i> Upload Photo</span>
-//                               <input type="file" className="upload" accept=".png, .jpg, .jpeg" onChange={handleFileChange}  />
-//                             </div>
-//                             <small className="form-text text-muted">Allowed JPG, PNG and JPEG. Max size of 2MB</small>
-//                           </div>
-//                         </div>
-//                       </div>
-//                     </div>
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -143,7 +6,7 @@ import Swal from 'sweetalert2';
 import { ToastContainer, toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
-
+import Loader from '../loader/Loader';
 const FormAddUser = () => {
     const [userData, setUserData] = useState({
         name: '',
@@ -170,7 +33,7 @@ const FormAddUser = () => {
     const [msg, setMsg] = useState('');
     const navigate = useNavigate();
     const apiUrl = process.env.REACT_APP_API_BASE_URL;
-
+const [loading, setLoading] = useState(false); // Loading state
     const handleChange = (e) => {
         const { name, value } = e.target;
         setUserData(prevState => ({
@@ -189,6 +52,7 @@ const FormAddUser = () => {
 
     const saveUser = async (e) => {
       e.preventDefault();
+      setLoading(true);
       try {
           // Prepare form data
           const formData = new FormData();
@@ -241,8 +105,14 @@ const FormAddUser = () => {
           setMsg(error.response.data.msg);
       }
       }
+      finally{
+        setLoading(false);  
+      }
   };
   
+  if (loading) {
+      return <Loader />;
+  }
   
 
     return (

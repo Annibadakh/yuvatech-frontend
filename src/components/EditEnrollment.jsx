@@ -3,8 +3,7 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import './StudentRegistration.css';
 import Swal from 'sweetalert2';
-
-
+import Loader from '../loader/Loader';
 
 function EditEnrollmentForm() {
     const { enrollmentId } = useParams();
@@ -35,6 +34,7 @@ function EditEnrollmentForm() {
     const [courses, setCourses] = useState([]);
     const [message, setMessage] = useState('');
     const apiUrl = process.env.REACT_APP_API_BASE_URL
+  const [loading, setLoading] = useState(false); // Loading state
 
     const navigate = useNavigate();
 
@@ -101,6 +101,8 @@ function EditEnrollmentForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+
         try {
             // Update student information
             await axios.patch(`${apiUrl}/students/${formData.studentId}`, {
@@ -143,10 +145,14 @@ function EditEnrollmentForm() {
         } catch (error) {
             setMessage('Failed to update student/enrollment: ' + error.message);
         }
+        finally {
+          setLoading(false); // End loading
+        }
     };
     const titleStyle = {
         fontFamily: 'Times New Roman, Times, serif'
       };
+      
 
     const handleReset = () => {
         setFormData({
@@ -175,6 +181,11 @@ function EditEnrollmentForm() {
 
         });
     };
+
+    
+  if (loading) {
+    return <Loader />;
+  }
 
     return (
         <div className="container">
