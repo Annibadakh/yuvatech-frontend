@@ -67,7 +67,7 @@ function BlogBox(props) {
             </div>
             <div className={styles.content}>
                 <h2>{props.title}</h2>
-                <p style={{textAlign:"justify"}}>{props.description}</p>
+                <p style={{textAlign:"justify", color:"white"}}>{props.description}</p>
             </div>
         </div>
     );

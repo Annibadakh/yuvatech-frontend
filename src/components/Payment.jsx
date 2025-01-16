@@ -342,7 +342,7 @@ function Payment({ studentId, enrollmentId, courseId }) {
         return res.data; // Assuming the response data contains the amount data
       })
       .then(data => {
-        const fetchedData = data.amountdata[0];
+        const fetchedData = data.amountdata;
         console.log('Amount data fetched successfully:', fetchedData);
         setAmountData(fetchedData);
       })
@@ -792,9 +792,6 @@ const validatePaymentAmount = (paymentAmount, balanceAmount, discount) => {
 
       const newTotalAmount = parseInt(paymentData.paymentAmount);
       const updatedInitialValues = {
-        sendtotalamount: amountdata.totalamount + newTotalAmount,
-        sendexpenses: amountdata.expenses,
-        sendbalance: amountdata.balance + newTotalAmount,
         sendcurrval: newTotalAmount,
         sendamounttype: "Amount",
         sendpaymentid: newPaymentId
@@ -1060,7 +1057,7 @@ const validatePaymentAmount = (paymentAmount, balanceAmount, discount) => {
             fullAddress={receipt.fullAddress}
             duedate={receipt.duedate}// Add this line
 
-
+            navigateto='/courses/viewenrollments'
             courses={receipt.courses}
             onPrint={handlePrint}
             onDownload={handleDownload}

@@ -158,7 +158,8 @@ body {
 .invoice-btns {
     margin-top: 20px;
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 .invoice-btn {

@@ -6147,7 +6147,7 @@ function PaymentForm() {
         return res.data; // Assuming the response data contains the amount data
       })
       .then(data => {
-        const fetchedData = data.amountdata[0];
+        const fetchedData = data.amountdata;
         console.log('Amount data fetched successfully:', fetchedData);
         setAmountData(fetchedData);
       })
@@ -6351,9 +6351,6 @@ function PaymentForm() {
 
         const newTotalAmount = parseInt(paymentData.paymentAmount);
         const updatedInitialValues = {
-        sendtotalamount: amountdata.totalamount + newTotalAmount,
-        sendexpenses: amountdata.expenses,
-        sendbalance: amountdata.balance + newTotalAmount,
         sendcurrval: newTotalAmount,
         sendamounttype: "Amount",
         sendpaymentid: paymentId
@@ -6602,7 +6599,7 @@ duedate={receipt.duedate}
             date={receipt.date}
             courses={receipt.courses}
       fullAddress={receipt.fullAddress} // Add this line
-
+            navigateto="/paymentdetails"
             onPrint={handlePrint}
             onDownload={handleDownload}
             onEmail={handleEmail}

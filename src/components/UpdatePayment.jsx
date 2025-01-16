@@ -370,7 +370,7 @@ function UpdateTransactionForm() {
       date={receipt.date}
       courses={receipt.courses}
       fullAddress={receipt.fullAddress} // Add this line
-
+      navigateto="/paymentdetails"
       onPrint={handlePrint}
       onDownload={handleDownload}
     />

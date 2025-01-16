@@ -91,7 +91,7 @@ const DropdownMenu = styled.ul`
   li {
     background: ${({ active }) => (active ? 'rgb(237, 231, 246)' : 'transparent')};
     border-left: ${({ active }) => (active ? '4px solid #632ce4' : 'none')};
-      border-radius: ${({ active }) => (active ? '10px' : '0')}; // Apply border-radius to active items
+      border-radius: ${({ active }) => (active ? '10px' : '')}; // Apply border-radius to active items
 
     
     a {
@@ -99,7 +99,7 @@ const DropdownMenu = styled.ul`
       color: ${({ active }) => (active ? '#632ce4' : '#15171c')};
       text-decoration: none;
       font-size: 16px;
-          border-radius: ${({ active }) => (active ? '10px' : '0')}; // Apply border-radius to links
+          border-radius: ${({ active }) => (active ? '10px' : '10px')}; // Apply border-radius to links
 
 
       &:hover {

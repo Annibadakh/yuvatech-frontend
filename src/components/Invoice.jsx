@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import styles from "./Invoice.module.css"; // Import CSS module
 import logo from "../assets/icon.png";
+import { useParams, useNavigate } from 'react-router-dom';
+
 
 const Invoice = ({
   enrollmentId,
@@ -20,8 +22,10 @@ const Invoice = ({
   onEmail,
   email,
   setEmail,
-  fullAddress
+  fullAddress,
+  navigateto,
 }) => {
+  const navigate = useNavigate();
   useEffect(() => {
     console.log("Invoice data:", {
       enrollmentId,
@@ -307,9 +311,16 @@ const printInvoice = () => {
               onClick={printInvoice}
             >
               <span>
-                <i className="fa-solid fa-print"></i>
+                {/* <i className="fa-solid fa-print"></i> */}
               </span>
               <span>Print</span>
+            </button>
+            <button
+              type="button"
+              className={styles["invoice-btn"]}
+              onClick={() => {navigate(navigateto);}}
+            >
+              <span>Close</span>
             </button>
            
           </div>

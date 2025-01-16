@@ -2289,10 +2289,78 @@ const PaymentDetails = () => {
   
   const navigate = useNavigate();
 
-  const fetchData = async () => {
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await axios.get(`${apiUrl}/payments`);
+  //     setData(response.data);
+  //     console.log("payment details", response.data);
+  //   } catch (error) {
+  //     Swal.fire({
+  //       icon: 'error',
+  //       title: 'Error fetching data',
+  //     });
+  //   }
+  // };
+
+  // const fetchData = async (isEdit = false) => {
+  //   try {
+  //     const response = await axios.get(`${apiUrl}/payments`);
+  //     const fetchedData = response.data;
+  
+  //     // Map to track the latest payment for each enrollmentId
+  //     const latestPayments = {};
+  
+  //     // Iterate to find the latest paymentDate for each enrollmentId
+  //     fetchedData.forEach((item) => {
+  //       if (
+  //         !latestPayments[item.enrollmentId] ||
+  //         new Date(item.paymentDate) > new Date(latestPayments[item.enrollmentId].paymentDate)
+  //       ) {
+  //         latestPayments[item.enrollmentId] = item;
+  //       }
+  //     });
+  
+  //     // Update isEdit flag for each record
+  //     const updatedData = fetchedData.map((item) => ({
+  //       ...item,
+  //       isEdit: latestPayments[item.enrollmentId].paymentId === item.paymentId, // Set isEdit true for the latest payment
+  //     }));
+  //     console.log("after filter", updatedData);
+  //     setData(updatedData);
+  //   } catch (error) {
+  //     Swal.fire({
+  //       icon: 'error',
+  //       title: 'Error fetching data',
+  //     });
+  //   }
+  // };
+  
+  const fetchData = async (isEdit = false) => {
     try {
       const response = await axios.get(`${apiUrl}/payments`);
-      setData(response.data);
+      const fetchedData = response.data;
+  
+      // Map to track the latest payment for each enrollmentId
+      const latestPayments = {};
+  
+      // Iterate to find the latest updatedAt (date and time) for each enrollmentId
+      fetchedData.forEach((item) => {
+        if (
+          !latestPayments[item.enrollmentId] ||
+          new Date(item.updatedAt) > new Date(latestPayments[item.enrollmentId].updatedAt)
+        ) {
+          latestPayments[item.enrollmentId] = item;
+        }
+      });
+  
+      // Update isEdit flag for each record
+      const updatedData = fetchedData.map((item) => ({
+        ...item,
+        isEdit: latestPayments[item.enrollmentId].paymentId === item.paymentId, // Set isEdit true for the latest updated record
+      }));
+  
+      console.log("after filter", updatedData);
+      setData(updatedData);
     } catch (error) {
       Swal.fire({
         icon: 'error',
@@ -2300,7 +2368,7 @@ const PaymentDetails = () => {
       });
     }
   };
-
+  
   const filterData = () => {
     let filtered = data;
 
@@ -2377,11 +2445,14 @@ const PaymentDetails = () => {
         Header: 'Actions',
         accessor: 'actions',
         disableSortBy: true,
-        Cell: ({ row }) => (
-          <Button color="primary" onClick={() => handleEdit(row)}>
-            <FontAwesomeIcon icon={faEdit} />
-          </Button>
-        ),
+        Cell: ({ row }) => {
+          const { isEdit } = row.original; // Accessing the original row data
+          return isEdit ? (
+            <Button color="primary" onClick={() => handleEdit(row.original)}>
+              <FontAwesomeIcon icon={faEdit} />
+            </Button>
+          ) : null; // Render nothing if `isEdit` is false
+        },
       },
     ],
     []
