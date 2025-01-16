@@ -265,7 +265,7 @@ function UpdateTransactionForm() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.formContainer}>
+      {!receipt && (<div className={styles.formContainer}>
         <h2>Update Transaction</h2>
         <form onSubmit={handleSubmit}>
           <div className={styles.formGroup}>
@@ -352,8 +352,8 @@ function UpdateTransactionForm() {
 <div className={styles.formGroup}>
 <button type="submit">Update Payment</button>
 </div>
-</form>
-</div>
+        </form>
+      </div>)}
 <div className={styles.receiptContainer}>
   {receipt && (
     <Invoice
@@ -365,7 +365,7 @@ function UpdateTransactionForm() {
       applicableFees={receipt.applicableFees} // Add this line
       paymentMode={receipt.paymentMode}
       paymentId={receipt.paymentId}
-
+      duedate={receipt.duedate}
       notes={receipt.notes}
       date={receipt.date}
       courses={receipt.courses}

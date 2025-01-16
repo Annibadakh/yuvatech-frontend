@@ -6043,8 +6043,9 @@ function PaymentForm() {
             <textarea id="notes" name="notes" placeholder="Enter any notes here" value={paymentData.notes} onChange={handleChange}></textarea>
           </div>
           <div className={styles.formActions}>
-            <button type="reset">Reset</button>
+            
             <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
           </div>
         </form>
       </div>

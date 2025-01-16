@@ -342,8 +342,9 @@ function EditEnrollmentForm() {
                 
 
                 <div className="form-group">
-                    <button type="reset" onClick={handleReset}>Reset</button>
+                    
                     <button type="submit">Submit</button>
+                    <button type="reset" onClick={handleReset}>Reset</button>
                 </div>
             </form>
         </div>

@@ -943,7 +943,8 @@ const validatePaymentAmount = (paymentAmount, balanceAmount, discount) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.formContainer}>
+      {!receipt && (
+        <div className={styles.formContainer}>
         <h2>Payment Form Test</h2>
         <form onSubmit={handleSubmit}>
           {/* <div className={styles.formGroup}>
@@ -1033,11 +1034,13 @@ const validatePaymentAmount = (paymentAmount, balanceAmount, discount) => {
             <input id='due' className='due' name='duedate' value={paymentData.duedate} onChange={handleChange} type="date"/>
           </div>
           <div className={styles.formActions}>
-            <button type="reset">Reset</button>
+            
             <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
           </div>
         </form>
       </div>
+      )}
 
       <div id="printableReceipt" className={styles.receiptContainer}>
         {receipt && (

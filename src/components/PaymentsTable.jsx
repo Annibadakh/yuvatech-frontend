@@ -2411,13 +2411,13 @@ const PaymentDetails = () => {
   const handleEdit = (row) => {
     Swal.fire({
       title: 'Edit Payment',
-      text: `Edit payment with ID: ${row.original.paymentId}`,
+      text: `Edit payment with ID: ${row.paymentId}`,
       icon: 'info',
       showCancelButton: true,
       confirmButtonText: 'OK',
     }).then((result) => {
       if (result.isConfirmed) {
-        navigate(`/payments/${row.original.paymentId}`);
+        navigate(`/payments/${row.paymentId}`);
       }
     });
   };

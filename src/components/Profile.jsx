@@ -62,14 +62,24 @@ const [loading,setloading] = useState(false);
     fetchProfileData();
   }, []);
 
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData(prevData => ({
+  //     ...prevData,
+  //     [name]: value
+  //   }));
+  // };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevData => ({
+  
+    setFormData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: ["firstName", "middleName", "lastName"].includes(name)
+        ? value.toUpperCase() // Convert specific fields to uppercase
+        : value, // Keep other fields unchanged
     }));
   };
-
   const handleTabChange1 = (tab) => {
     setShowProfile(tab === 'profile');
     setShowIdentityDocuments(tab === 'identityDocuments');

@@ -402,9 +402,10 @@ const [loading,setloading] = useState(false);
                 </div> */}
 
                <div className="form-group">
-                        <button type="reset" onClick={handleReset}>Reset</button>
+                        
                         <button type="submit">Submit and Next </button>
                         <button type="button" onClick={handleSaveAndExit}>Save and Exit</button>
+                        <button type="reset" onClick={handleReset}>Reset</button>
                 </div>
 
             </form>

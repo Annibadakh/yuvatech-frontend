@@ -76,13 +76,24 @@ const [loading, setLoading] = useState(false); // Loading state
     fetchProfileData();
   }, []);
 
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData(prevData => ({
+  //     ...prevData,
+  //     [name]: value
+  //   }));
+  // };
   const handleChange = (e) => {
     const { name, value } = e.target;
+  
     setFormData(prevData => ({
       ...prevData,
-      [name]: value
+      [name]: ["fir stName",'name', "middleName", "lastName"].includes(name)
+        ? value.toUpperCase() // Convert to uppercase for specific fields
+        : value, // Leave other fields unchanged
     }));
   };
+  
   const [msg, setMsg] = useState('');
 
   const handleTabChange1 = (tab) => {

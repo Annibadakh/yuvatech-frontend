@@ -413,7 +413,7 @@ const[loading,setLoading] = useState(false);
        
         <div className="form-group">
           {/* <Button type="submit" color="primary">Submit</Button> */}
-          <button style={{marginTop:"10px"}} type="button"onClick={handleReset}>Reset</button>
+          {/* <button style={{marginTop:"10px"}} type="button"onClick={handleReset}>Reset</button> */}
         </div>
       </form>
       {error && <div className="error-message">{error}</div>}
