@@ -15,6 +15,7 @@ function BudgetApp() {
   const [productTitleError, setProductTitleError] = useState('');
   const [expensedata, setExpensedata] = useState([]); // Ensure this is initialized as an array
   const [selectedExpense, setSelectedExpense] = useState(null);
+  const [expenseChanged, setExpenseChnaged] = useState(false);
   const [amountdata, setAmountData] = useState({
     totalamount: 0,
     expenses: 0,
@@ -58,7 +59,7 @@ function BudgetApp() {
         return res.data; // Assuming the response data contains the amount data
       })
       .then(data => {
-        const fetchedData = data.amountdata[0];
+        const fetchedData = data.amountdata;
         console.log('Amount data fetched successfully:', fetchedData);
         setAmountData(fetchedData);
       })
@@ -75,9 +76,6 @@ function BudgetApp() {
     }
 
     const updatedInitialValues = {
-      sendtotalamount: amountdata.totalamount + newTotalAmount,
-      sendexpenses: amountdata.expenses,
-      sendbalance: amountdata.balance + newTotalAmount,
       sendcurrval: newTotalAmount,
       sendamounttype: "Amount",
       sendpaymentid: "externalAmount"
@@ -87,7 +85,8 @@ function BudgetApp() {
     axios.post(`${apiurl}/amount/initialValues`, updatedInitialValues)
       .then(response => {
         console.log('Total amount stored successfully:', response.data);
-        fetchAmountData(); 
+        fetchAmountData();
+        setExpenseChnaged(!expenseChanged);
       })
       .catch(error => console.error('Error:', error));
 
@@ -111,9 +110,6 @@ function BudgetApp() {
 
       if (!selectedExpense) {
         const updatedValues = {
-          sendtotalamount: amountdata.totalamount,
-          sendexpenses: amountdata.expenses + newUserAmount,
-          sendbalance: amountdata.balance - newUserAmount,
           sendcurrval: newUserAmount,
           sendamounttype: "Expense",
           sendpaymentid: "externalExpense"
@@ -130,9 +126,6 @@ function BudgetApp() {
       } else {
         const diff = newUserAmount - selectedExpense.amount;
         const updatedExpensesValues = {
-          sendtotalamount: amountdata.totalamount,
-          sendexpenses: amountdata.expenses + diff,
-          sendbalance: amountdata.balance - diff,
           sendcurrval: diff,
           sendamounttype: "Expense",
           sendpaymentid: "externalExpense"
@@ -150,6 +143,7 @@ function BudgetApp() {
       await Promise.all(requests);
       fetchAmountData();
       fetchExpenses();
+      setExpenseChnaged(!expenseChanged);
       setProductTitle('');
       setUserAmount('');
       setSelectedExpense(null);
@@ -185,7 +179,7 @@ function BudgetApp() {
 
   return (
     <div className="wrapper">
-      <div><BudgetSorting /></div>
+      <div><BudgetSorting expenseChanged={expenseChanged} /></div>
       <div className="container">
         <div className="sub-container">
           <div className="total-amount-container">

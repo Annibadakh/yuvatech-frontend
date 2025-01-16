@@ -6,7 +6,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 // Register necessary components for Chart.js
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const BudgetSorting = () => {
+const BudgetSorting = ({expenseChanged}) => {
     const [years, setYears] = useState([]); // Available years for the year dropdown
     const [selectedYear, setSelectedYear] = useState(new Date().getFullYear()); // Default to current year
     const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1); // Default to current month
@@ -87,7 +87,7 @@ const BudgetSorting = () => {
     // Trigger data fetch when year or month is changed
     useEffect(() => {
         fetchData();
-    }, [selectedYear, selectedMonth]);
+    }, [selectedYear, selectedMonth, expenseChanged]);
 
     // Pie chart data and options
     const pieChartData = {

@@ -144,60 +144,6 @@ function UpdateTransactionForm() {
     }
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   if (errors.paymentAmountError) {
-  //     Swal.fire('Error', errors.paymentAmountError, 'error');
-  //     return;
-  //   }
-
-  //   try {
-  //     // if (paymentId) {
-  //     //   await axios.patch(`${apiUrl}/payments/${paymentId}`, {
-  //     //     enrollmentId: paymentData.enrollmentId,
-  //     //     amount: parseFloat(paymentData.paymentAmount),
-  //     //     paymentMethod: paymentData.paymentMode,
-  //     //     notes: paymentData.notes,
-  //     //     previousPaymentAmount: parseFloat(previousPaymentAmount)
-  //     //   });
-
-  //     //   Swal.fire('Success', 'Payment updated successfully!', 'success');
-  //     // }
-  //     if (paymentId) {
-  //       await axios.patch(`${apiUrl}/payments/${paymentId}`, {
-  //         enrollmentId: paymentData.enrollmentId,
-  //         amount: parseFloat(paymentData.paymentAmount),
-  //         paymentMethod: paymentData.paymentMode,
-  //         notes: paymentData.notes,
-  //         previousPaymentAmount: parseFloat(previousPaymentAmount),
-  //         newBalanceAmount: parseFloat(paymentData.newBalanceLeft), // New balance amount
-  //       });
-      
-  //       Swal.fire('Success', 'Payment updated successfully!', 'success');
-  //     }
-      
-
-  //     const receiptData = {
-  //       enrollmentId: paymentData.enrollmentId,
-  //       studentName: paymentData.studentName,
-  //       address: paymentData.address,
-  //       paymentAmount: paymentData.paymentAmount,
-  //       paymentMode: paymentData.paymentMode,
-  //       balanceAmount: paymentData.balanceAmount,
-  //       notes: paymentData.notes,
-  //       date: new Date().toLocaleString(),
-  //       courses: [
-  //         { name: paymentData.courseName, totalFees: '$1000', amountPaid: paymentData.paymentAmount, pendingFees: (1000 - parseFloat(paymentData.paymentAmount)).toFixed(2) },
-  //       ],
-  //     };
-
-  //     setReceipt(receiptData);
-
-  //   } catch (error) {
-  //     console.error('Failed to update payment:', error);
-  //     Swal.fire('Error', 'Failed to update payment.', 'error');
-  //   }
-  // };
   const fetchCurrentBalance = async (enrollmentId) => {
     try {
       const response = await axios.get(`${apiUrl}/paymentsbalance/${enrollmentId}`);
@@ -401,6 +347,7 @@ function UpdateTransactionForm() {
             <label htmlFor="due">Due Date:</label>
             <input id='due' className='due' name='duedate' value={paymentData.duedate} onChange={handleChange} type="date"/>
           </div>
+          
 
 <div className={styles.formGroup}>
 <button type="submit">Update Payment</button>

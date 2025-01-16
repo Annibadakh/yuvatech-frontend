@@ -2296,7 +2296,8 @@ const EnrollmentDetails = () => {
       const allData = response.data;
   
       // Filter data to show only enrollments with status "enrolled"
-      const enrolledData = allData.filter(item => item.status === 'enrolled');
+      // const enrolledData = allData.filter(item => item.status === 'enrolled');
+      const enrolledData = allData;
   
       setData(enrolledData);
       setFilteredData(enrolledData);

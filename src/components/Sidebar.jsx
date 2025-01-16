@@ -171,8 +171,8 @@ const Sidebar = () => {
       '/studentinfo': 'studentinfo',
       '/register': 'register',
       '/courses/viewenrollments': 'viewenrollments',
-      '/cancelledenrollments':'cancelledenrollments',
-      '/completedenrollments':'completedenrollments',
+      // '/cancelledenrollments':'cancelledenrollments',
+      // '/completedenrollments':'completedenrollments',
       '/courses/add': 'addcourse',
       '/courses/edit/:id': 'courses',
       '/courses/editdocuments/:id': 'courses',
@@ -199,8 +199,8 @@ const Sidebar = () => {
       courses: ['/courses', '/courses/add'],
       users: ['/users', '/users/add'],
       payments: ['/payments/view', '/payments','/paymentdetails'],
-      student: ['/student', '/studentinfo', '/register'],
-      enrollments:['/courses/viewenrollments','/cancelledenrollments','/completedenrollments'],
+      student: ['/student', '/studentinfo'],
+      enrollments:['/courses/viewenrollments', '/register'],
     };
 
    
@@ -280,30 +280,30 @@ const Sidebar = () => {
 {isStudent() && (
 <SidebarMenu>
   <SidebarMenuItem active={activeItem === 'studentdashboard'}>
-    <NavLink to={userRole === 'student' ? '/studentdashboard' : '/dashboard'} onClick={handleNavLinkClick}>       
+    <NavLink to='/studentdashboard' onClick={handleNavLinkClick}>       
       
       <i className='bx bxs-dashboard'></i>
       <span>Dashboard</span>
     </NavLink>
   </SidebarMenuItem>
   <SidebarMenuItem active={activeItem === 'profile'}>
-    <NavLink to={userRole === 'student' ? '/profile' : '/myprofile'} onClick={handleNavLinkClick}>       
+    <NavLink to='/profile' onClick={handleNavLinkClick}>       
       
-      <i className='bx bxs-dashboard'></i>
+      <i className='bx bxs-user'></i>
       <span>Profile</span>
     </NavLink>
   </SidebarMenuItem>
   <SidebarMenuItem active={activeItem === 'myenrollments'}>
-    <NavLink to={userRole === 'student' ? '/myenrollments' : '/dashboard'} onClick={handleNavLinkClick}>       
+    <NavLink to='/myenrollments' onClick={handleNavLinkClick}>       
       
-      <i className='bx bxs-dashboard'></i>
+      <i className='bx bxs-edit'></i>
       <span>My Enrollments</span>
     </NavLink>
   </SidebarMenuItem>
   <SidebarMenuItem active={activeItem === 'mytransactions'}>
-    <NavLink to={userRole === 'student' ? '/mytransactions' : '/dashboard'} onClick={handleNavLinkClick}>       
+    <NavLink to='/mytransactions' onClick={handleNavLinkClick}>       
       
-      <i className='bx bxs-dashboard'></i>
+      <i className='bx bxs-wallet-alt'></i>
       <span>My Transactions</span>
     </NavLink>
   </SidebarMenuItem>
@@ -319,23 +319,57 @@ const Sidebar = () => {
 
 {!isStudent() && (<SidebarMenu>
         <SidebarMenuItem active={activeItem === 'dashboard'}>
-          <NavLink to={userRole === 'student' ? '/studentdashboard' : '/dashboard'} onClick={handleNavLinkClick}>
+          <NavLink to='/dashboard' onClick={handleNavLinkClick}>
             <i className='bx bxs-dashboard'></i>
             <span>Dashboard</span>
           </NavLink>
         </SidebarMenuItem>
 
         <SidebarMenuItem active={activeItem === 'myprofile'}>
-          <NavLink to={userRole === 'student' ? '/profile' : '/myprofile'} onClick={handleNavLinkClick}>
-            <i className='bx bxs-dashboard'></i>
+          <NavLink to='/myprofile' onClick={handleNavLinkClick}>
+            <i className='bx bxs-user'></i>
             <span>My Profile</span>
           </NavLink>
         </SidebarMenuItem>
 
         {/* Courses Dropdown */}
+        
+
+        <SidebarMenuItem>
+          <NavLink to="#" onClick={() => toggleDropdown('users')}>
+            <i className='bx bxs-group'></i>
+            <span>Users</span>
+            <i className={`bx ${dropdowns['users'] ? 'bx-chevron-up' : 'bx-chevron-down'}`}></i>
+          </NavLink>
+          <DropdownMenu isOpen={dropdowns['users']}>
+  <li>
+    <NavLink 
+      to="/users" 
+      onClick={handleNavLinkClick}
+      style={{ background: activeItem === 'viewusers' ? '#3c91e6' : '' }}
+    >
+      View Users
+    </NavLink>
+    {/* {console.log('View Courses active:', activeItem === 'viewusers')} */}
+  </li>
+  <li>
+    {userRole === 'admin' && (
+      <NavLink 
+      to="/users/add" 
+      onClick={handleNavLinkClick}
+      style={{ background: activeItem === 'addusers' ? '#3c91e6' : 'transparent' }}
+    >
+      Add Users
+    </NavLink>
+    )}
+  </li>
+</DropdownMenu>
+
+        </SidebarMenuItem>
+
         <SidebarMenuItem>
           <NavLink to="#" onClick={() => toggleDropdown('courses')}>
-            <i className='bx bxs-shopping-bag-alt'></i>
+            <i className='bx bxs-book'></i>
             <span>Courses</span>
             <i className={`bx ${dropdowns['courses'] ? 'bx-chevron-up' : 'bx-chevron-down'}`}></i>
           </NavLink>
@@ -364,40 +398,9 @@ const Sidebar = () => {
 
         </SidebarMenuItem>
 
-        <SidebarMenuItem>
-          <NavLink to="#" onClick={() => toggleDropdown('users')}>
-            <i className='bx bxs-shopping-bag-alt'></i>
-            <span>Users</span>
-            <i className={`bx ${dropdowns['users'] ? 'bx-chevron-up' : 'bx-chevron-down'}`}></i>
-          </NavLink>
-          <DropdownMenu isOpen={dropdowns['users']}>
-  <li>
-    <NavLink 
-      to="/users" 
-      onClick={handleNavLinkClick}
-      style={{ background: activeItem === 'viewusers' ? '#3c91e6' : '' }}
-    >
-      View Users
-    </NavLink>
-    {/* {console.log('View Courses active:', activeItem === 'viewusers')} */}
-  </li>
-  <li>
-    <NavLink 
-      to="/users/add" 
-      onClick={handleNavLinkClick}
-      style={{ background: activeItem === 'addusers' ? '#3c91e6' : 'transparent' }}
-    >
-      Add Users
-    </NavLink>
-    {/* {console.log('Add USers active:', activeItem === 'addusers')} */}
-  </li>
-</DropdownMenu>
-
-        </SidebarMenuItem>
-
 <SidebarMenuItem>
   <NavLink to="#" onClick={() => toggleDropdown('payments')}>
-    <i className='bx bxs-shopping-bag-alt'></i>
+    <i className='bx bxs-credit-card'></i>
     <span>Payments</span>
     <i className={`bx ${dropdowns['payments'] ? 'bx-chevron-up' : 'bx-chevron-down'}`}></i>
   </NavLink>
@@ -431,7 +434,7 @@ const Sidebar = () => {
 
         <SidebarMenuItem>
           <NavLink to="#" onClick={() => toggleDropdown('enrollments')}>
-            <i className='bx bxs-shopping-bag-alt'></i>
+            <i className='bx bxs-edit'></i>
             <span>Enrollments</span>
             <i className={`bx ${dropdowns['enrollments'] ? 'bx-chevron-up' : 'bx-chevron-down'}`}></i>
           </NavLink>
@@ -442,11 +445,17 @@ const Sidebar = () => {
       onClick={handleNavLinkClick}
       style={{ background: activeItem === 'viewenrollments' ? '#3c91e6' : '' }}
     >
-      Ongoing 
+      View Enrollments 
     </NavLink>
-    {/* {console.log('View payments active:', activeItem === 'viewpayments')} */}
   </li>
   <li>
+    <NavLink
+    to="/register" 
+    style={{ background: activeItem === 'register' ? '#3c91e6' : 'transparent'}}
+    onClick={handleNavLinkClick}>Enroll Student
+    </NavLink>
+  </li>
+  {/* <li>
     <NavLink 
       to="/cancelledenrollments" 
       onClick={handleNavLinkClick}
@@ -454,7 +463,6 @@ const Sidebar = () => {
     >
       Cancelled 
     </NavLink>
-    {/* {console.log('Add Payments active:', activeItem === 'addpayments')} */}
   </li>
   <li>
     <NavLink 
@@ -464,8 +472,7 @@ const Sidebar = () => {
     >
       Completed 
     </NavLink>
-    {/* {console.log('Add Payments active:', activeItem === 'addpayments')} */}
-  </li>
+  </li> */}
 </DropdownMenu>
 
   </SidebarMenuItem>
@@ -475,40 +482,47 @@ const Sidebar = () => {
           
         <SidebarMenuItem>
           <NavLink to="#" onClick={() => toggleDropdown('student')}>
-            <i className='bx bxs-doughnut-chart'></i>
-            <span>Student</span>
+            <i className='bx bxs-help-circle'></i>
+            <span>Enquiry</span>
             <i className={`bx ${dropdowns['student'] ? 'bx-chevron-up' : 'bx-chevron-down'}`}></i>
           </NavLink>
           <DropdownMenu isOpen={dropdowns['student']}>
             <li>
-              <NavLink to="/student" onClick={handleNavLinkClick} style={{ background: activeItem === 'student' ? '#3c91e6' : 'transparent' }}>Add Enquiry</NavLink>
-            </li>
-            <li>
               <NavLink to="/studentinfo" style={{ background: activeItem === 'studentinfo' ? '#3c91e6' : 'transparent'}} onClick={handleNavLinkClick}>View Students</NavLink>
             </li>
             <li>
-              <NavLink to="/register" style={{ background: activeItem === 'register' ? '#3c91e6' : 'transparent'}} onClick={handleNavLinkClick}>Enroll Student</NavLink>
+              <NavLink to="/student" onClick={handleNavLinkClick} style={{ background: activeItem === 'student' ? '#3c91e6' : 'transparent' }}>Add Enquiry</NavLink>
             </li>
+            {/* <li>
+              <NavLink to="/register" style={{ background: activeItem === 'register' ? '#3c91e6' : 'transparent'}} onClick={handleNavLinkClick}>Enroll Student</NavLink>
+            </li> */}
           </DropdownMenu>
         </SidebarMenuItem>
         <SidebarMenuItem active={activeItem === 'budget'}>
-      <NavLink to={userRole === 'admin' ? '/budget' : '/budget'} onClick={handleNavLinkClick}>
-        <i className='bx bxs-dashboard'></i>
+      <NavLink to="/budget" onClick={handleNavLinkClick}>
+        <i className='bx bxs-pie-chart-alt-2'></i>
         <span>Budget </span>
       </NavLink>
         </SidebarMenuItem>
+        
+      {userRole === 'admin' && (
         <SidebarMenuItem active={activeItem === 'bloginput'}>
-      <NavLink to={userRole === 'admin' ? '/bloginput' : '/dashboard'} onClick={handleNavLinkClick}>
-        <i className='bx bxs-dashboard'></i>
+        <NavLink to='/bloginput' onClick={handleNavLinkClick}>
+        <i className='bx bxs-pencil'></i>
         <span>Blog Input </span>
       </NavLink>
-        </SidebarMenuItem>
+      </SidebarMenuItem>
+      )}
+      {userRole === 'admin' && (
         <SidebarMenuItem active={activeItem === 'contacts'}>
-          <NavLink to={userRole === 'admin' ? '/contacts' : '/dashboard'} onClick={handleNavLinkClick}>
-            <i className='bx bxs-dashboard'></i>
-            <span>Contactus </span>
-          </NavLink>
-        </SidebarMenuItem>
+        <NavLink to='/contacts' onClick={handleNavLinkClick}>
+          <i className='bx bxs-envelope'></i>
+          <span>Contactus </span>
+        </NavLink>
+      </SidebarMenuItem>
+      )}
+        
+        
         
         
 
