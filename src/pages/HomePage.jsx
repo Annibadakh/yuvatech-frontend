@@ -49,7 +49,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--primary-color);
+    background: #3C91E6;
     border-radius: 5px;
   }
   

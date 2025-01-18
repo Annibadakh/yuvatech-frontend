@@ -14,6 +14,7 @@ function UpdateTransactionForm() {
   const navigate = useNavigate();
   const [initialPaymentAmount, setInitialPaymentAmount] = useState(0);
   const [previousPaymentAmount, setPreviousPaymentAmount] = useState('');
+  const [isDueDate, setisDueDate] = useState(true);
 
   const [paymentData, setPaymentData] = useState({
     enrollmentId: '',
@@ -139,6 +140,10 @@ function UpdateTransactionForm() {
     if (newBalanceLeft < 0) {
       setErrors(prev => ({ ...prev, paymentAmountError: 'Payment amount cannot exceed the balance amount.' }));
     } else {
+      if(newBalanceLeft === 0){
+        setisDueDate(false);
+        setPaymentData(prev => ({ ...prev, duedate: null }));
+      }
       setErrors(prev => ({ ...prev, paymentAmountError: '' }));
       setPaymentData(prev => ({ ...prev, newBalanceLeft: newBalanceLeft.toFixed(2) }));
     }
@@ -200,6 +205,7 @@ function UpdateTransactionForm() {
             address: paymentData.address,
             paymentAmount: paymentData.paymentAmount,
             paymentMode: paymentData.paymentMode,
+            duedate: paymentData.duedate,
             balanceAmount: balanceData.currentBalance,
             applicableFees: balanceData.applicableFees,
             notes: paymentData.notes,
@@ -330,14 +336,21 @@ function UpdateTransactionForm() {
 </div>
           <div className={styles.formGroup}>
             <label htmlFor="paymentMode">Payment Mode</label>
-            <input
+            {/* <input
               type="text"
               id="paymentMode"
               name="paymentMode"
               value={paymentData.paymentMode}
               onChange={handleChange}
               required
-            />
+            /> */}
+            <select id="paymentMode" name="paymentMode" value={paymentData.paymentMode} onChange={handleChange}>
+              <option value="">Select Payment Mode</option>
+              <option value="Cash">Cash</option>
+              <option value="Credit Card">Credit Card</option>
+              <option value="Debit Card">Debit Card</option>
+              <option value="Online Transfer">Online Transfer</option>
+            </select>
           </div>
           <div className={styles.formGroup}>
             <label htmlFor="notes">Notes</label>
@@ -345,7 +358,7 @@ function UpdateTransactionForm() {
           </div>
           <div className={styles.formGroup}>
             <label htmlFor="due">Due Date:</label>
-            <input id='due' className='due' name='duedate' value={paymentData.duedate} onChange={handleChange} type="date"/>
+            <input id='due' className='due' name='duedate' disabled={!isDueDate} value={paymentData.duedate} onChange={handleChange} type="date"/>
           </div>
           
 

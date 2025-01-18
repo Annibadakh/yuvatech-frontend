@@ -286,7 +286,7 @@ const printInvoice = () => {
                     padding: "2px",
                   }}>
                     Due Date :{" "}
-                    <span style={{ fontWeight: "normal" }}>{new Date(duedate).toLocaleDateString("en-GB")}</span>
+                    <span style={{ fontWeight: "normal" }}>{balanceAmount !== 0 ? new Date(duedate).toLocaleDateString("en-GB") : '---'} </span>
                   </div>
               </div>
             </div>

@@ -6132,6 +6132,7 @@ function PaymentForm() {
   const [receipt, setReceipt] = useState(null);
   const [email, setEmail] = useState('');
   const [enrollments, setEnrollments] = useState([]);
+  const [isDueDate, setisDueDate] = useState(true);
   const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
@@ -6301,6 +6302,10 @@ function PaymentForm() {
     if (newBalanceLeft < 0) {
       setErrors(prev => ({ ...prev, paymentAmountError: 'Payment amount cannot exceed the balance amount.' }));
     } else {
+      if(newBalanceLeft === 0){
+        setisDueDate(false);
+        setPaymentData(prev => ({ ...prev, duedate: null }));
+      }
       setErrors(prev => ({ ...prev, paymentAmountError: '' }));
       console.log('Setting new balance left:', newBalanceLeft.toFixed(2)); // Debugging log
       setPaymentData(prev => ({ ...prev, newBalanceLeft: newBalanceLeft.toFixed(2) }));
@@ -6538,15 +6543,15 @@ function PaymentForm() {
             <label htmlFor="paymentAmount">Payment Amount:</label>
            {/* // <input type="number" id="paymentAmount" name="paymentAmount" placeholder="Enter Payment Amount" value={paymentData.paymentAmount} onChange={handleChange} /> */}
            <input
-  type="number"
-  id="paymentAmount"
-  name="paymentAmount"
-  placeholder="Enter Payment Amount"
-  value={paymentData.paymentAmount}
-  onChange={handleChange}
-  inputMode="numeric"
-  style={{ '-moz-appearance': 'textfield' }} // For Firefox
-/>
+              type="number"
+              id="paymentAmount"
+              name="paymentAmount"
+              placeholder="Enter Payment Amount"
+              value={paymentData.paymentAmount}
+              onChange={handleChange}
+              inputMode="numeric"
+              style={{ '-moz-appearance': 'textfield' }} // For Firefox
+            />
 
             {errors.paymentAmountError && <div className={styles.errorMessage}>{errors.paymentAmountError}</div>}
           </div>
@@ -6574,7 +6579,7 @@ function PaymentForm() {
           </div>
           <div className={styles.formGroup}>
             <label htmlFor="due">Due Date:</label>
-            <input id='due' className='due' name='duedate' value={paymentData.duedate} onChange={handleChange} type="date"/>
+            <input id='due' className='due' name='duedate' value={paymentData.duedate} onChange={handleChange} disabled={!isDueDate}  type="date"/>
           </div>
           <div className={styles.formActions}>
             
@@ -6597,7 +6602,7 @@ function PaymentForm() {
             applicableFees={receipt.applicableFees} // Add this line
             paymentMode={receipt.paymentMode}
             paymentId={receipt.paymentId}
-duedate={receipt.duedate}
+            duedate={receipt.duedate}
             notes={receipt.notes}
             date={receipt.date}
             courses={receipt.courses}
