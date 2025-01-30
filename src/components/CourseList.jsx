@@ -9,6 +9,9 @@ import { useTable, usePagination, useGlobalFilter, useSortBy } from 'react-table
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Swal from 'sweetalert2';
 import Loader from '../loader/Loader';
+import { useSelector } from 'react-redux';
+
+
 
 const CoursesList = () => {
   const [courses, setCourses] = useState([]);
@@ -17,6 +20,10 @@ const CoursesList = () => {
   const [endDate, setEndDate] = useState('');
   const apiUrl = process.env.REACT_APP_API_BASE_URL;
   const [loading, setLoading] = useState(true); // Loading state
+  const userRole = useSelector(state => state.auth.user?.role);
+  
+
+  
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -100,23 +107,27 @@ const CoursesList = () => {
       id: 'actions',
       Cell: ({ row }) => (
         <div style={{ minWidth: "200px", textAlign: 'center' }}>
-          <Link to={`/courses/edit/${row.original.courseId}`} className="btn btn-sm btn-info" style={{ marginRight: '5px' }}>
+          {userRole === 'admin'  && (
+            <Link to={`/courses/edit/${row.original.courseId}`} className="btn btn-sm btn-info" style={{ marginRight: '5px' }}>
             <FontAwesomeIcon icon={faEdit} />
           </Link>
+          )}
           <Link to={`/courses/viewcoursedocuments/${row.original.courseId}`} className="btn btn-sm btn-info" style={{ marginRight: '5px' }}>
             <FontAwesomeIcon icon={faFileAlt} /> View Doc
           </Link>
           <Link to={`/courses/editdocuments/${row.original.courseId}`} className="btn btn-sm btn-info" style={{ marginRight: '5px' }}>
             <FontAwesomeIcon icon={faFileAlt} /> Add Doc
           </Link>
-          <button onClick={() => deleteCourse(row.original.courseId)} className="btn btn-sm btn-danger" style={{ marginRight: '5px' }}>
+          {userRole === 'admin' && (
+            <button onClick={() => deleteCourse(row.original.courseId)} className="btn btn-sm btn-danger" style={{ marginRight: '5px' }}>
             <FontAwesomeIcon icon={faTrashAlt} />
           </button>
+          )}
         </div>
       ),
       headerStyle: { textAlign: 'center' } // Center align the Actions header
     }
-  ], []);
+  ], [userRole]);
 
   const {
     getTableProps,

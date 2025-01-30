@@ -384,7 +384,8 @@ const Sidebar = () => {
     </NavLink>
     {/* {console.log('View Courses active:', activeItem === 'viewcourses')} */}
   </li>
-  <li>
+  {userRole === 'admin' && (
+    <li>
     <NavLink 
       to="/courses/add" 
       onClick={handleNavLinkClick}
@@ -394,6 +395,7 @@ const Sidebar = () => {
     </NavLink>
     {/* {console.log('Add Course active:', activeItem === 'addcourse')} */}
   </li>
+  )}
 </DropdownMenu>
 
         </SidebarMenuItem>
