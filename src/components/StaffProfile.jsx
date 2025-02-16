@@ -329,7 +329,7 @@ const [loading, setLoading] = useState(false); // Loading state
                 <div className="col-12 col-md-4">
                   <div className="mb-3">
                     <label className="mb-2">Gender <span className="text-danger"> *</span></label>
-                    <select className="form-select form-control" name="gender" value={formData.gender} onChange={handleChange}>
+                    <select  name="gender" value={formData.gender} onChange={handleChange}>
                       <option value="">Select</option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>

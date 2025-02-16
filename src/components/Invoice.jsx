@@ -93,31 +93,30 @@ const printInvoice = () => {
                       width: 100%;
                       height: 100%;
                   }
-                      
-                  #receiptContainer {
+
+                  .receipt-wrapper {
+                      display: flex;
+                      flex-wrap: wrap;
+                      justify-content: space-between;
                       width: 100%;
                       height: 100%;
                       page-break-inside: avoid;
                   }
-                      .hr {
-                        border-top: 1px solid black; /* Or use your specific style */
-                        margin: 10px 0; /* Adjust margin as necessary */
-                        width: 100%;
-                    }
-                }
 
-                  /* Ensure it fits in one page */
-                  @page {
-                      size: A4;
-                      margin: 0;
+                  .receipt-container {
+                      width: 48%;
+                      display: inline-block;
+                      box-sizing: border-box;
+                      padding: 10px;
+                      border: 1px solid black;
+                      margin-bottom: 10px;
                   }
+              }
 
-                  /* Ensure .hr div is included in print */
-                  .hr {
-                      border-top: 1px solid black; /* Or use your specific style */
-                      margin: 10px 0; /* Adjust margin as necessary */
-                      width: 100%;
-                  }
+              @page {
+                  size: A4 landscape;
+                  margin: 0mm;
+              }
               }
           </style>
       </head>
