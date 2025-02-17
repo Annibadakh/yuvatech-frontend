@@ -114,7 +114,7 @@ const printInvoice = () => {
               }
 
               @page {
-                  size: A4 landscape;
+                  size: A4 portrait;
                   margin: 0mm;
               }
               }
@@ -141,21 +141,14 @@ const printInvoice = () => {
       <div className={styles["invoice-container"]}>
         <div className={styles["invoice-head"]}>
 
-        <div
+        {/* <div
           className={styles.hr}
           style={{ borderTop: '1px solid black', margin: '0', width: '100%' }}
-        ></div>
+        ></div> */}
 
 <div
   className={styles["invoice-head-container"]}
-  style={{
-    display: "flex",
-    justifyContent: "space-between",
-    gap: "10px",
-    alignItems: "center", // Vertically aligns both logo and content
-    // height: "100vh", // Full viewport height
-    padding: "0 20px", // Optional padding for spacing
-  }}
+  
 >
   {/* Logo on the left */}
   <div style={{ width: "150px" }}>
@@ -179,7 +172,7 @@ const printInvoice = () => {
         marginBottom: "5px",
       }}
     >
-      YuvaTech Computers
+      YuvaTech Computer Institute
     </div>
     <div
       style={{
@@ -260,7 +253,7 @@ const printInvoice = () => {
                 style={{
                   display: "flex",
                   flexFlow:"column",
-                  alignItems:"start",
+                  // alignItems:"start",
                   width: "100%",
                   border: "1px solid black"
                 }}
@@ -269,6 +262,11 @@ const printInvoice = () => {
                   Total Fees :{" "}
                   <span style={{ fontWeight: "normal" }}>{applicableFees} </span>
                 </div>
+                <div style={{
+                  display:"flex",
+                  flexFlow:"row",
+                  justifyContent:"space-between"
+                }}>
                 <div
                   style={{
                     fontWeight: "bold",
@@ -287,6 +285,7 @@ const printInvoice = () => {
                     Due Date :{" "}
                     <span style={{ fontWeight: "normal" }}>{balanceAmount !== 0 ? new Date(duedate).toLocaleDateString("en-GB") : '---'} </span>
                   </div>
+                </div>
               </div>
             </div>
           </div>
@@ -294,9 +293,8 @@ const printInvoice = () => {
         <div className={styles["invoice-foot"]}>
           <p>
             <span className={`${styles["text-bold"]} ${styles["text-center"]}`}>
-              NOTE:&nbsp;
+              NOTE:&nbsp;Payment is non-refundable after 8 days from the date of payment.
             </span>
-            Payment is non-refundable after 8 days from the date of payment.
           </p>
 
         </div>

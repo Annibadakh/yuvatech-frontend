@@ -93,7 +93,12 @@ body {
     padding: 7px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 5px;
-    min-height: 920px;
+    /* min-height: 920px; */
+}
+.invoice-head-container{
+    display: grid;
+    grid-template-columns: 20% 80%;
+    padding: 0px 20px;
 }
 
 .invoice-head-top-left img {
@@ -143,7 +148,7 @@ body {
 }
 
 .invoice-body-info-item .info-item-td {
-    padding: 12px;
+    padding: 6px;
     background-color: rgba(0, 0, 0, 0.02);
 }
 
