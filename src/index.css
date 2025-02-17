@@ -13,7 +13,11 @@ html{
   scroll-behavior: smooth;
 }
 input.form-control {
-  font-size: 14px;
+  font-size: 20px;
+}
+
+.custom-select {
+  font-size: 20px;
 }
 
 html::-webkit-scrollbar{
@@ -297,7 +301,7 @@ body {
   align-items: center;
   background: var(--blue);
   color: var(--light);
-  font-size: 18px;
+  font-size: 20px;
   border: none;
   outline: none;
   border-radius: 0 36px 36px 0;
@@ -527,7 +531,7 @@ body {
 
 #content main .table-data .order table th {
   padding-bottom: 12px;
-  font-size: 13px;
+  font-size: 18px;
   text-align: left;
   border-bottom: 1px solid var(--grey);
 }

@@ -252,7 +252,7 @@ function EditEnrollmentForm() {
     <div className="mb-3">
         <label>Gender:</label>
         <label className="mb-2">Gender <span className="text-danger"> *</span></label>
-<select className="form-select form-control" name="gender" value={formData.gender} onChange={handleChange}>
+<select  name="gender" value={formData.gender} onChange={handleChange}>
   <option value="">Select</option>
   <option value="Male">Male</option>
   <option value="Female">Female</option>
